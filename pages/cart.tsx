@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import Head from "next/head";
+import Header from "../components/Header";
 
 const Cart: NextPage = () => {
   return (
@@ -9,7 +10,7 @@ const Cart: NextPage = () => {
       </Head>
 
       <main>
-        <h1>Cart</h1>
+        <Header />
       </main>
     </>
   );

@@ -11,9 +11,11 @@
     "cypress:headless": "cypress run"
   },
   "dependencies": {
+    "firebase": "^9.6.11",
     "next": "12.1.5",
     "react": "18.0.0",
-    "react-dom": "18.0.0"
+    "react-dom": "18.0.0",
+    "react-icons": "^4.3.1"
   },
   "devDependencies": {
     "@types/node": "17.0.25",

@@ -1,10 +1,14 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import styles from "../styles/Home.module.css";
+import { useState } from "react";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import useNotification from "../components/useNotification";
 
 const Home: NextPage = () => {
+  const { notification, showNotification } = useNotification();
+  const [num, setNum] = useState(0);
+
   return (
     <>
       <Head>
@@ -12,12 +16,21 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <h1>Heading</h1>
-        <Link passHref href="/cart">
-          <a data-cy="cart-link" className="bg-gray-300 rounded-lg px-2 py-1">
-            Cart
-          </a>
-        </Link>
+        <Header />
+
+        <button
+          onClick={() => {
+            setNum((prev) => prev + 1);
+            showNotification(num.toString(), "bg-blue-700", 1000);
+          }}
+          className="px-4 py-2 my-4 bg-gray-300"
+        >
+          Test
+        </button>
+
+        {notification}
+
+        <Footer />
       </main>
     </>
   );
