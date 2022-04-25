@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import useNotification from "../components/useNotification";
+import useNotification from "../hooks/useNotification";
 
 const Home: NextPage = () => {
   const { notification, showNotification } = useNotification();
@@ -21,7 +21,15 @@ const Home: NextPage = () => {
         <button
           onClick={() => {
             setNum((prev) => prev + 1);
-            showNotification(num.toString(), "bg-blue-700", 1000);
+            showNotification(num.toString(), "bg-blue-700", 8000);
+          }}
+          className="px-4 py-2 my-4 bg-gray-300 text-red-500"
+        >
+          Test
+        </button>
+        <button
+          onClick={() => {
+            showNotification("stuff", "", 3000);
           }}
           className="px-4 py-2 my-4 bg-gray-300"
         >

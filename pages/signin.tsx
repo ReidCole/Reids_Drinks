@@ -7,29 +7,32 @@ import AlreadySignedIn from "../components/AlreadySignedIn";
 import SignInForm from "../components/SignInForm";
 import SignInSwitcher from "../components/SignInSwitcher";
 import { AuthContext } from "../context/AuthContext";
+import useNotification from "../hooks/useNotification";
 
 const SignIn: NextPage = () => {
   const [isCreatingAccount, setIsCreatingAccount] = useState<boolean>(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  // const [errorMsg, setErrorMsg] = useState("");
   const [errorMsgCount, setErrorMsgCount] = useState(0);
   const authContext = useContext(AuthContext);
   const router = useRouter();
   const { prevRoute } = router.query;
+  const { notification, showNotification } = useNotification();
 
-  useEffect(() => {
-    if (errorMsgCount === 0) return;
+  // useEffect(() => {
+  //   if (errorMsgCount === 0) return;
 
-    const timeout = setTimeout(() => {
-      setErrorMsg("");
-    }, 5000);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [errorMsgCount]);
+  //   const timeout = setTimeout(() => {
+  //     setErrorMsg("");
+  //   }, 5000);
+  //   return () => {
+  //     clearTimeout(timeout);
+  //   };
+  // }, [errorMsgCount]);
 
   function setError(msg: string) {
-    setErrorMsg(msg);
-    setErrorMsgCount((prev) => prev + 1);
+    // setErrorMsg(msg);
+    // setErrorMsgCount((prev) => prev + 1);
+    showNotification(msg, "bg-red-600", 5000);
   }
 
   function onSubmit(email: string, password: string) {
@@ -115,14 +118,16 @@ const SignIn: NextPage = () => {
               </p>
             </div>
 
-            {errorMsg.length > 0 && (
+            {notification}
+
+            {/* {errorMsg.length > 0 && (
               <div
                 data-cy="error-msg"
                 className="bg-red-500 text-white font-bold p-2 mt-6 mx-auto max-w-lg"
               >
                 {errorMsg}
               </div>
-            )}
+            )} */}
           </div>
         ) : (
           <AlreadySignedIn />
