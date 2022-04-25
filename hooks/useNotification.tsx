@@ -1,7 +1,10 @@
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 
-const useNotification = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+const useNotification: () => {
+  notification: JSX.Element;
+  showNotification: (text: string, styles: string, timeoutTime: number) => void;
+} = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentText, setCurrentText] = useState<string>("");
   const [currentStyles, setCurrentStyles] = useState<string>("");
   const [currentTimeout, setCurrentTimeout] = useState<NodeJS.Timeout | null>(null);
@@ -31,9 +34,10 @@ const useNotification = () => {
       <div
         className={`w-full fixed bottom-0 left-0 notification ${isOpen ? "notification-open" : ""}`}
       >
-        <p className={`text-center bg-gray-700 text-white p-3 m-4 ${currentStyles}`}>your mom</p>
+        <p className={`bg-gray-700 text-white p-3 m-4 text-center ${currentStyles}`}>
+          {currentText}
+        </p>
       </div>
-      // <div className="text-2xl text-red-600 bg-blue-200 w-10 h-10 p-2 m-2">fuck</div>
     ),
     showNotification: showNotification,
   };
