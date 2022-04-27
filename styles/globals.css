@@ -1,19 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+html {
+  -webkit-tap-highlight-color: transparent;
+}
 
-@layer components {
-  html {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  .notification {
-    transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
-    transform: translateY(100%);
-  }
-  
-  .notification-open {
-    transform: translateY(0%);
-  }
+.notification {
+  transition: transform .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform: translateY(100%);
+}
+
+.notification-open {
+  transform: translateY(0%);
+}
+
+.modal {
+  transition: transform .3s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  transform: translateY(100%);
+}
+
+.modal-open {
+  transform: translateY(0%);
 }

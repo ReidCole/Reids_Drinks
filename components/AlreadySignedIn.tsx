@@ -17,14 +17,14 @@ const AlreadySignedIn: React.FC = () => {
         {authContext.user.email}
       </p>
       <button
-        className="bg-gray-600 text-white font-bold py-1 w-60 rounded-lg"
+        className="bg-gray-600 text-white py-2 w-60 rounded-lg"
         onClick={() => authContext.signOut()}
       >
         Sign Out
       </button>
       {typeof prevRoute !== "undefined" && !Array.isArray(prevRoute) && (
         <button
-          className="bg-green-700 text-white font-bold py-1 w-60 rounded-lg"
+          className="bg-green-700 text-white py-2 w-60 rounded-lg"
           onClick={() => router.push(prevRoute)}
         >
           Go Back

@@ -15,7 +15,7 @@ const SidebarLink: React.FC<Props> = ({ href, text, Icon, onClick }) => {
   if (onClick)
     return (
       <button
-        data-cy="sidebar-btn"
+        data-cy="sidebar-link"
         className="flex flex-row items-center px-2 py-4 text-xl gap-2"
         onClick={onClick}
       >
@@ -27,7 +27,7 @@ const SidebarLink: React.FC<Props> = ({ href, text, Icon, onClick }) => {
   return (
     <Link href={href} passHref>
       <a
-        data-cy="sidebar-btn"
+        data-cy="sidebar-link"
         className={
           "flex flex-row items-center px-2 py-4 text-xl gap-2 " +
           (router.pathname == href ? "font-bold bg-green-200" : "")

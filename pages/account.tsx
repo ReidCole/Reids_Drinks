@@ -1,17 +1,28 @@
 import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Notification from "../components/Notification";
 import { AuthContext } from "../context/AuthContext";
+import useNotificationState from "../hooks/useNotificationState";
 
 const Account: NextPage = () => {
   const authContext = useContext(AuthContext);
+  const [notifState, showNotif] = useNotificationState();
 
-  function onDeleteAccountFulfilled() {}
+  function onDeleteAccountFulfilled() {
+    showNotif("Account successfully deleted.", "bg-green-600");
+  }
 
-  function onDeleteAccountError(errorMsg: string) {}
+  function onDeleteAccountError(errorMsg: string) {
+    if (errorMsg === "auth/requires-recent-login") {
+      // reauthenticate
+    } else {
+      showNotif("Error deleting account: " + errorMsg, "bg-red-600");
+    }
+  }
 
   if (authContext === null) return <></>;
 
@@ -33,18 +44,21 @@ const Account: NextPage = () => {
           </h1>
 
           <Link href="/resetpassword" passHref>
-            <a className="bg-gray-600 text-white font-bold py-1 w-60 rounded-lg mb-4">
+            <a
+              data-cy="resetpassword-link"
+              className="bg-gray-600 text-white py-2 w-60 rounded-lg mb-4 text-center"
+            >
               Reset Password
             </a>
           </Link>
-          <button
-            onClick={() =>
-              authContext.deleteAccount(onDeleteAccountFulfilled, onDeleteAccountError)
-            }
-            className="bg-red-700 text-white font-bold py-1 w-60 rounded-lg mb-4"
-          >
-            Delete Account
-          </button>
+          <Link href="/deleteaccount" passHref>
+            <a
+              data-cy="deleteaccount-link"
+              className="bg-red-700 text-white py-2 w-60 rounded-lg mb-4 text-center"
+            >
+              Delete Account
+            </a>
+          </Link>
         </div>
       ) : (
         <div className="flex flex-col items-center">
@@ -52,12 +66,12 @@ const Account: NextPage = () => {
             You are not signed in. Please sign in to manage your account.
           </p>
           <Link href="/signin?prevRoute=/account">
-            <a className="bg-gray-600 text-white font-bold py-1 w-60 rounded-lg mb-4 text-center">
-              Sign In
-            </a>
+            <a className="bg-gray-600 text-white py-2 w-60 rounded-lg mb-4 text-center">Sign In</a>
           </Link>
         </div>
       )}
+
+      <Notification state={notifState} />
 
       <Footer />
     </>

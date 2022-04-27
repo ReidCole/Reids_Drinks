@@ -4,35 +4,21 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useContext, useEffect, useState } from "react";
 import AlreadySignedIn from "../components/AlreadySignedIn";
+import Notification from "../components/Notification";
 import SignInForm from "../components/SignInForm";
 import SignInSwitcher from "../components/SignInSwitcher";
 import { AuthContext } from "../context/AuthContext";
-import useNotification from "../hooks/useNotification";
+import useNotificationState from "../hooks/useNotificationState";
 
 const SignIn: NextPage = () => {
   const [isCreatingAccount, setIsCreatingAccount] = useState<boolean>(false);
-  // const [errorMsg, setErrorMsg] = useState("");
-  const [errorMsgCount, setErrorMsgCount] = useState(0);
   const authContext = useContext(AuthContext);
   const router = useRouter();
   const { prevRoute } = router.query;
-  const { notification, showNotification } = useNotification();
-
-  // useEffect(() => {
-  //   if (errorMsgCount === 0) return;
-
-  //   const timeout = setTimeout(() => {
-  //     setErrorMsg("");
-  //   }, 5000);
-  //   return () => {
-  //     clearTimeout(timeout);
-  //   };
-  // }, [errorMsgCount]);
+  const [notifState, showNotif] = useNotificationState();
 
   function setError(msg: string) {
-    // setErrorMsg(msg);
-    // setErrorMsgCount((prev) => prev + 1);
-    showNotification(msg, "bg-red-600", 5000);
+    showNotif(msg, "bg-red-600");
   }
 
   function onSubmit(email: string, password: string) {
@@ -50,7 +36,7 @@ const SignIn: NextPage = () => {
 
   function onFulfilled() {
     if (typeof prevRoute === "undefined" || Array.isArray(prevRoute)) {
-      console.error("prevRoute is not a string. might be undefined or a string array");
+      router.push("/");
       return;
     }
     router.push(prevRoute);
@@ -78,6 +64,9 @@ const SignIn: NextPage = () => {
       case "auth/too-many-requests":
         setError("Error: Too many requests to the server. Please try again later.");
         break;
+      case "auth/internal-error":
+        setError("Error: Internal server error. Please try again later.");
+        break;
       default:
         setError("Error: " + error.code);
     }
@@ -88,7 +77,7 @@ const SignIn: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Sign In</title>
+        <title>Sign In - Reid&apos;s Drinks</title>
       </Head>
 
       <main className="flex flex-col items-center">
@@ -112,22 +101,15 @@ const SignIn: NextPage = () => {
                 </a>
               </Link>
 
-              <p className="absolute bottom-0 left-0 text-center p-2 w-full bg-gray-300">
-                Don&apos;t want to use your real email address? Feel free to sign up using a fake
-                one. You won&apos;t be asked to verify it.
-              </p>
+              {isCreatingAccount && (
+                <p className="text-center p-2 w-full">
+                  Don&apos;t want to use your real email address? Feel free to sign up using a fake
+                  one. You won&apos;t be asked to verify it, as this is just a sample website.
+                </p>
+              )}
             </div>
 
-            {notification}
-
-            {/* {errorMsg.length > 0 && (
-              <div
-                data-cy="error-msg"
-                className="bg-red-500 text-white font-bold p-2 mt-6 mx-auto max-w-lg"
-              >
-                {errorMsg}
-              </div>
-            )} */}
+            <Notification state={notifState} />
           </div>
         ) : (
           <AlreadySignedIn />

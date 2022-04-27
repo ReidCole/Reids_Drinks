@@ -11,6 +11,7 @@ const SignInSwitcher: React.FC<Props> = ({ isCreatingAccount, setIsCreatingAccou
           "flex items-center justify-center gap-2 px-1 py-2 text-center " +
           (!isCreatingAccount && "bg-green-300")
         }
+        data-cy="signin-tab"
       >
         <input
           checked={!isCreatingAccount}
@@ -25,6 +26,7 @@ const SignInSwitcher: React.FC<Props> = ({ isCreatingAccount, setIsCreatingAccou
           "flex items-center justify-center gap-2 px-1 py-2 text-center " +
           (isCreatingAccount && "bg-green-300")
         }
+        data-cy="createaccount-tab"
       >
         <input
           checked={isCreatingAccount}

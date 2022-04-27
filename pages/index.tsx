@@ -1,42 +1,57 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
+import FeaturedProduct from "../components/FeaturedProduct";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import useNotification from "../hooks/useNotification";
+import Modal from "../components/Modal";
+import Notification from "../components/Notification";
+import ScrollableProductsList, { ProductListing } from "../components/ScrollableProductsList";
+import useNotificationState from "../hooks/useNotificationState";
+
+import imgGreenTea from "../public/img/greentea.jpg";
+
+// todo: move this to another file with other product lists
+const products: ProductListing[] = [
+  {
+    title: "Green Tea",
+    imgUrl: imgGreenTea,
+    price: 69.99,
+    productId: "foiwejofijawpofjawpf",
+  },
+  {
+    title: "Green Tea",
+    imgUrl: imgGreenTea,
+    price: 69.99,
+    productId: "efefefef",
+  },
+  {
+    title: "Green Tea",
+    imgUrl: imgGreenTea,
+    price: 69.99,
+    productId: "43ffw3e",
+  },
+];
 
 const Home: NextPage = () => {
-  const { notification, showNotification } = useNotification();
-  const [num, setNum] = useState(0);
-
   return (
     <>
       <Head>
-        <title>Online Store Example</title>
+        <title>Home - Reid&apos;s Drinks</title>
       </Head>
 
       <main>
         <Header />
 
-        <button
-          onClick={() => {
-            setNum((prev) => prev + 1);
-            showNotification(num.toString(), "bg-blue-700", 8000);
-          }}
-          className="px-4 py-2 my-4 bg-gray-300 text-red-500"
-        >
-          Test
-        </button>
-        <button
-          onClick={() => {
-            showNotification("stuff", "", 3000);
-          }}
-          className="px-4 py-2 my-4 bg-gray-300"
-        >
-          Test
-        </button>
+        <ScrollableProductsList listHeading="Popular" products={products} />
 
-        {notification}
+        <FeaturedProduct
+          title="Green Tea Deluxe"
+          description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique quae culpa libero voluptas blanditiis molestiae! Quaerat odio maxime quasi ducimus dolorem totam placeat animi. Repellendus nemo sit perferendis velit rem."
+          imgUrl={imgGreenTea}
+        />
+
+        <ScrollableProductsList listHeading="New" products={products} />
 
         <Footer />
       </main>

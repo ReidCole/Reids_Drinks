@@ -8,6 +8,7 @@ type Props = {
 const SignInForm: React.FC<Props> = ({ isCreatingAccount, onSubmit }) => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const canSignIn: boolean = emailValue.length > 0 && passwordValue.length > 0;
 
   return (
     <form
@@ -42,7 +43,10 @@ const SignInForm: React.FC<Props> = ({ isCreatingAccount, onSubmit }) => {
       <button
         data-cy="signin-submitbtn"
         type="submit"
-        className="bg-green-700 py-2 font-bold text-white rounded-lg"
+        className={
+          "py-2 font text-white rounded-lg " + (canSignIn ? "bg-green-700" : "bg-gray-700")
+        }
+        disabled={!canSignIn}
       >
         {isCreatingAccount ? "Create New Account" : "Sign In"}
       </button>

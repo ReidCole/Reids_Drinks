@@ -9,8 +9,10 @@ import {
   signOut as fbSignOut,
   deleteUser,
   sendPasswordResetEmail,
+  reauthenticateWithCredential,
+  UserCredential,
+  EmailAuthProvider,
 } from "firebase/auth";
-import { useRouter } from "next/router";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDYZSBiYFXEuItK2IuCgZIR8MzWwfw8ius",
@@ -28,8 +30,8 @@ type ContextType = {
   signIn: (
     email: string,
     password: string,
-    onFulfilled: () => void,
-    onError: (error: any) => void
+    onFulfilled?: () => void,
+    onError?: (error: any) => void
   ) => void;
   signUp: (
     email: string,
@@ -41,6 +43,12 @@ type ContextType = {
   deleteAccount: (onFulfilled: () => void, onError: (errorMsg: string) => void) => void;
   resetPassword: (
     email: string,
+    onFulfilled: () => void,
+    onError: (errorMsg: string) => void
+  ) => void;
+  reauthenticate: (
+    email: string,
+    password: string,
     onFulfilled: () => void,
     onError: (errorMsg: string) => void
   ) => void;
@@ -72,12 +80,16 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
   function signIn(
     email: string,
     password: string,
-    onFulfilled: () => void,
-    onError: (error: any) => void
+    onFulfilled?: () => void,
+    onError?: (error: any) => void
   ) {
     fbSignIn(auth, email, password)
-      .then(() => onFulfilled())
-      .catch((error) => onError(error));
+      .then((cred) => {
+        if (onFulfilled) onFulfilled();
+      })
+      .catch((error) => {
+        if (onError) onError(error);
+      });
   }
 
   function signUp(
@@ -115,6 +127,26 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
       .catch((error) => onError(error.code));
   }
 
+  function reauthenticate(
+    email: string,
+    password: string,
+    onFulfilled: () => void,
+    onError: (errorMsg: string) => void
+  ) {
+    if (user === null) {
+      fbSignIn(auth, email, password)
+        .then(() => onFulfilled())
+        .catch((error) => onError(error.code));
+      return;
+    }
+
+    const credential = EmailAuthProvider.credential(email, password);
+
+    reauthenticateWithCredential(user, credential)
+      .then(() => onFulfilled())
+      .catch((error) => onError(error.code));
+  }
+
   const value: ContextType = {
     user: user,
     signIn: signIn,
@@ -122,6 +154,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
     signOut: signOut,
     deleteAccount: deleteAccount,
     resetPassword: resetPassword,
+    reauthenticate: reauthenticate,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
