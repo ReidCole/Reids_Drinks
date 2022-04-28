@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { initializeApp } from "firebase/app";
 import {
-  getAuth,
   onAuthStateChanged,
   User,
   signInWithEmailAndPassword as fbSignIn,
@@ -10,20 +8,9 @@ import {
   deleteUser,
   sendPasswordResetEmail,
   reauthenticateWithCredential,
-  UserCredential,
   EmailAuthProvider,
+  Auth,
 } from "firebase/auth";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDYZSBiYFXEuItK2IuCgZIR8MzWwfw8ius",
-  authDomain: "reidsdrinks.firebaseapp.com",
-  projectId: "reidsdrinks",
-  storageBucket: "reidsdrinks.appspot.com",
-  messagingSenderId: "160288144196",
-  appId: "1:160288144196:web:1dfb9b13359766dd453511",
-};
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 
 type ContextType = {
   user: User | null;
@@ -58,9 +45,10 @@ export const AuthContext = React.createContext<ContextType | null>(null);
 
 type Props = {
   children: JSX.Element;
+  auth: Auth;
 };
 
-const AuthProvider: React.FC<Props> = ({ children }) => {
+const AuthProvider: React.FC<Props> = ({ children, auth }) => {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -74,7 +62,7 @@ const AuthProvider: React.FC<Props> = ({ children }) => {
     });
 
     return () => unsub();
-  }, []);
+  }, [auth]);
 
   // add error callbacks to this and signup functions
   function signIn(

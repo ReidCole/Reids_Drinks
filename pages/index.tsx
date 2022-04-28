@@ -6,32 +6,10 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Modal from "../components/Modal";
 import Notification from "../components/Notification";
-import ScrollableProductsList, { ProductListing } from "../components/ScrollableProductsList";
+import ScrollableProductsList from "../components/ScrollableProductsList";
 import useNotificationState from "../hooks/useNotificationState";
 
-import imgGreenTea from "../public/img/greentea.jpg";
-
-// todo: move this to another file with other product lists
-const products: ProductListing[] = [
-  {
-    title: "Green Tea",
-    imgUrl: imgGreenTea,
-    price: 69.99,
-    productId: "foiwejofijawpofjawpf",
-  },
-  {
-    title: "Green Tea",
-    imgUrl: imgGreenTea,
-    price: 69.99,
-    productId: "efefefef",
-  },
-  {
-    title: "Green Tea",
-    imgUrl: imgGreenTea,
-    price: 69.99,
-    productId: "43ffw3e",
-  },
-];
+import { ProductListing } from "./product/[id]";
 
 const Home: NextPage = () => {
   return (
@@ -43,7 +21,8 @@ const Home: NextPage = () => {
       <main>
         <Header />
 
-        <ScrollableProductsList listHeading="Popular" products={products} />
+        {/* fetch products from firestore */}
+        {/* <ScrollableProductsList listHeading="Popular" products={products} />
 
         <FeaturedProduct
           title="Green Tea Deluxe"
@@ -52,6 +31,8 @@ const Home: NextPage = () => {
         />
 
         <ScrollableProductsList listHeading="New" products={products} />
+
+        <ScrollableProductsList listHeading="Unique" products={products} /> */}
 
         <Footer />
       </main>

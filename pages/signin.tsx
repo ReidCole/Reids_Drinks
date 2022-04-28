@@ -67,6 +67,9 @@ const SignIn: NextPage = () => {
       case "auth/internal-error":
         setError("Error: Internal server error. Please try again later.");
         break;
+      case "firebase-context-null":
+        setError("Error: Couldn't connect to authentication servers. Please try again later.");
+        break;
       default:
         setError("Error: " + error.code);
     }

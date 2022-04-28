@@ -1,12 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-
-export type ProductListing = {
-  title: string;
-  price: number;
-  imgUrl: StaticImageData;
-  productId: string;
-};
+import { ProductListing } from "../pages/product/[id]";
 
 type Props = {
   listHeading: string;
@@ -15,17 +9,24 @@ type Props = {
 
 const ScrollableProductsList: React.FC<Props> = ({ listHeading, products }) => {
   return (
-    <>
+    <div className="border-b-2 border-green-700">
       <h2 className="text-lg pl-2 pt-2">{listHeading}</h2>
       <div className="overflow-x-scroll">
         <div className="w-max p-4 flex flex-row gap-4 items-center">
           {products.map((product) => (
             <div key={product.productId} className="w-44">
               <Link passHref href={`/product/${product.productId}`}>
-                <Image src={product.imgUrl} width={640} height={425} alt={product.title} />
+                <a>
+                  <Image
+                    src={product.thumbnailImgUrl}
+                    width={640}
+                    height={425}
+                    alt={product.title}
+                  />
+                </a>
               </Link>
               <div className="flex flex-col justify-between">
-                <Link passHref href={`/product/${product.productId}`}>
+                <Link href={`/product/${product.productId}`}>
                   <a className="text-md">{product.title}</a>
                 </Link>
                 <p className="text-sm">${product.price}</p>
@@ -34,7 +35,7 @@ const ScrollableProductsList: React.FC<Props> = ({ listHeading, products }) => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

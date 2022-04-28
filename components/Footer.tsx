@@ -5,8 +5,8 @@ const Footer: React.FC = () => {
     <footer className="bg-green-800 text-white p-2 text-center flex flex-col gap-2">
       <p>Made by Reid Cole</p>
       <p>
-        Disclaimer: This website is not a real store. It is a sample website made to showcase my
-        skills as a web developer. See my{" "}
+        This website is not a real store. It is a sample website made to showcase my skills as a web
+        developer. See my{" "}
         <Link passHref href="https://cosmic-platypus-75760a.netlify.app/">
           <a className="text-green-300 underline">portfolio site</a>
         </Link>{" "}

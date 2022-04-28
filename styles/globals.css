@@ -9,7 +9,7 @@ html {
 }
 
 .notification {
-  transition: transform .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: transform .4s cubic-bezier(0.075, 0.82, 0.165, 1);
   transform: translateY(100%);
 }
 
