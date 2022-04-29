@@ -26,7 +26,8 @@ const Notification: React.FC<Props> = ({ state }) => {
     >
       <p
         className={
-          "text-white px-2 py-4 m-3 text-center " + (state.styles ? state.styles : "bg-gray-600")
+          "text-white px-2 py-4 m-3 text-center shadow-xl shadow-black " +
+          (state.styles ? state.styles : "bg-gray-600")
         }
       >
         {isOpen ? state.text : ""}

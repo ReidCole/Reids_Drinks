@@ -1,85 +1,168 @@
 import { NextPage } from "next";
-import Image, { StaticImageData } from "next/image";
+import Head from "next/head";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
+import Modal from "../../components/Modal";
 import Notification from "../../components/Notification";
 import { DatabaseContext } from "../../context/DatabaseContext";
 import useNotificationState from "../../hooks/useNotificationState";
-
 import unloadedImg from "../../public/img/unloaded-image.png";
 
 export type ProductListing = {
   title: string;
+  description: string;
   price: string;
   thumbnailImgUrl: string;
   highResImgUrl: string;
   imgAttribution: string;
-  imgWidth: number;
-  imgHeight: number;
   productId: string;
+  rating: number;
 };
 
 const Product: NextPage = () => {
   const databaseContext = useContext(DatabaseContext);
   const [product, setProduct] = useState<ProductListing | null>(null);
   const [notifState, showNotif] = useNotificationState();
-  const [test, setTest] = useState("");
+  const [errorFindingProduct, setErrorFindingProduct] = useState(false);
+  const [quantity, setQuantity] = useState("1");
+  const [buyModalOpen, setBuyModalOpen] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
-  // start over with writing this fetching. could check for a specific error state and show that instead of a notification. like show something different on the page statically if the requested product doesn't exist. and set that error state value within the onError callback
+  useEffect(() => {
+    if (product !== null || typeof id === "undefined") return;
+    console.log("effect", databaseContext, id, product);
+    async function fetchProduct() {
+      if (databaseContext === null) return;
 
-  // useEffect(() => {
-  //   console.log("trying");
-  //   if (databaseContext === null || product !== null) return;
+      if (typeof id === "undefined" || Array.isArray(id)) return;
 
-  //   async function fetchProduct() {
-  //     if (databaseContext === null) return;
+      const p = await databaseContext.getProduct(id, onError);
+      setProduct(p);
+    }
 
-  //     if (typeof id === "undefined" || Array.isArray(id)) return;
+    function onError() {
+      setErrorFindingProduct(true);
+    }
 
-  //     const p = await databaseContext.getProduct(id, onError);
-  //     setProduct(p);
-  //   }
+    fetchProduct();
+  }, [databaseContext, id, product]);
 
-  //   function onError(msg: string) {
-  //     // showNotif(msg, "bg-red-600");
-  //     setTest("oiwj");
-  //     console.error("e");
-  //   }
+  function quantityIsValid(): boolean {
+    const quantityInteger = parseInt(quantity);
+    if (Number.isNaN(quantityInteger) || quantityInteger < 1) {
+      return false;
+    }
+    return true;
+  }
 
-  //   fetchProduct();
-  //   console.log("test");
-  // }, [databaseContext, product, id]);
+  function onBuy() {
+    if (!quantityIsValid()) {
+      showNotif("Please input a valid quantity.", "bg-red-600");
+      return;
+    }
+
+    setBuyModalOpen(true);
+  }
+
+  function onAddToCart() {
+    if (!quantityIsValid()) {
+      showNotif("Please input a valid quantity.", "bg-red-600");
+      return;
+    }
+
+    showNotif(`Added ${quantity} item${quantity !== "1" ? "s" : ""} to cart.`, "bg-green-600");
+    return;
+  }
 
   return (
     <>
-      <Header />
+      <Head>
+        <title>{product ? `${product.title} - Reid's Drinks` : "Reid's Drinks"}</title>
+      </Head>
 
       <main>
-        <div className="flex flex-col p-4 gap-2">
-          {product ? (
-            <Image
-              src={product.highResImgUrl}
-              width={product.imgWidth}
-              height={product.imgHeight}
-              alt={product.title}
-            />
-          ) : (
-            <Image src={unloadedImg} width={640} height={425} alt="" />
-          )}
+        <Header />
 
-          <p className="italic text-gray-700 text-sm">{product ? product.imgAttribution : "..."}</p>
-          <h1 className="text-2xl">{product ? product.title : "..."}</h1>
-          <p className="">{product ? `\$${product.price}` : "$..."}</p>
-        </div>
+        {errorFindingProduct ? (
+          <div>
+            <p className="p-2">Couldn&apos;t find requested product</p>
+          </div>
+        ) : (
+          <div className="flex flex-col p-4">
+            <div className="flex flex-col mb-3">
+              {product ? (
+                <Image src={product.highResImgUrl} width={640} height={425} alt={product.title} />
+              ) : (
+                <Image src={unloadedImg} width={640} height={425} alt="" />
+              )}
+              <p className="italic text-gray-700 text-sm mt-2">
+                {product ? product.imgAttribution : "..."}
+              </p>
+            </div>
+
+            <div className="flex flex-col mb-4">
+              <h1 className="text-2xl font-bold">{product ? product.title : "..."}</h1>
+              <p className="">{product ? `\$${product.price}` : "..."}</p>
+            </div>
+
+            <div>
+              <label className="bg-gray-200 p-2 rounded-lg flex flex-row items-center w-36 gap-2 mb-4">
+                <p>Quantity</p>
+                <input
+                  className="bg-white rounded-lg text-left pl-2 w-full"
+                  type="number"
+                  value={quantity}
+                  onChange={(e) => {
+                    setQuantity(e.target.value);
+                  }}
+                />
+              </label>
+              <div className="flex flex-row w-full gap-2 mb-6">
+                <button
+                  onClick={onBuy}
+                  className="py-2 px-4 bg-blue-600  rounded-lg text-white basis-full"
+                >
+                  Buy Now
+                </button>
+                <button
+                  onClick={onAddToCart}
+                  className="py-2 px-4 bg-green-700 rounded-lg text-white basis-full"
+                >
+                  Add To Cart
+                </button>
+              </div>
+            </div>
+            <hr className="border-b border-gray-700 mb-6" />
+            <div className="mb-8">
+              <p>{product ? product.description : "..."}</p>
+            </div>
+          </div>
+        )}
+
+        <Modal isOpen={buyModalOpen} setIsOpen={setBuyModalOpen} heading="Just Kidding">
+          <p className="p-2 text-center">
+            Because this site isn&apos;t a real store, you can&apos;t actually buy anything. You can
+            still add items to your cart and view them, though.
+          </p>
+          <div className="absolute bottom-0 p-2 flex flex-row w-full gap-2">
+            <button
+              data-cy="modal-cancelbtn"
+              onClick={() => setBuyModalOpen(false)}
+              className="bg-green-700 text-white p-2 rounded-lg basis-full"
+            >
+              How rude...
+            </button>
+          </div>
+        </Modal>
+
+        <Notification state={notifState} />
+
+        <Footer />
       </main>
-
-      <Notification state={notifState} />
-
-      <Footer />
     </>
   );
 };

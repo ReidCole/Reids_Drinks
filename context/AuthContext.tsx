@@ -72,7 +72,7 @@ const AuthProvider: React.FC<Props> = ({ children, auth }) => {
     onError?: (error: any) => void
   ) {
     fbSignIn(auth, email, password)
-      .then((cred) => {
+      .then(() => {
         if (onFulfilled) onFulfilled();
       })
       .catch((error) => {
