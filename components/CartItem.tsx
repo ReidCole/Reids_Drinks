@@ -82,6 +82,7 @@ const CartItem: React.FC<Props> = ({ cartItemData, lastItem, refreshItems }) => 
             if (databaseContext === null) return;
             setQuantity(q);
             databaseContext.updateQuantityInCart(cartItemData.productId, q);
+            refreshItems();
           }}
         />
         <button

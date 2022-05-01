@@ -12,8 +12,41 @@ const Cart: NextPage = () => {
   const [cartItems, setCartItems] = useState<CartItemData[]>([]);
   const [triedToGetCartItems, setTriedToGetCartItems] = useState(false);
   const [subtotal, setSubtotal] = useState(0);
+  const [allProducts, setAllProducts] = useState<ProductListing[]>([]);
 
   useEffect(() => {
+    console.log("get");
+    async function getAllProducts() {
+      if (databaseContext === null) return;
+
+      const p = await databaseContext.getAllProducts(() => {
+        console.error("TODO: make actual error for getting all products");
+      });
+      setAllProducts(p);
+    }
+
+    getAllProducts();
+  }, [databaseContext]);
+
+  useEffect(() => {
+    if (allProducts.length === 0) return;
+    console.log("sub");
+    let st = 0;
+    for (let i = 0; i < cartItems.length; i++) {
+      const product = allProducts.find((p) => p.productId === cartItems[i].productId);
+      if (typeof product === "undefined") {
+        console.error(
+          "subtotal calc error: there was a product in the cart items that couldn't be found in allProducts."
+        );
+        return;
+      }
+      st += product.price * cartItems[i].quantity;
+    }
+    setSubtotal(st);
+  }, [cartItems, allProducts]);
+
+  useEffect(() => {
+    console.log("cart");
     if (cartItems.length !== 0 || databaseContext === null || triedToGetCartItems) return;
 
     setCartItems(databaseContext.getAllCartItemDatas());
