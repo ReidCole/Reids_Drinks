@@ -14,32 +14,32 @@ export type CartItemData = {
 
 type Props = {
   cartItemData: CartItemData;
-  product: ProductListing | null;
   lastItem: boolean;
   refreshItems: () => void;
 };
 
-const CartItem: React.FC<Props> = ({ cartItemData, lastItem, refreshItems, product }) => {
+const CartItem: React.FC<Props> = ({ cartItemData, lastItem, refreshItems }) => {
   const databaseContext = useContext(DatabaseContext);
+  const [product, setProduct] = useState<ProductListing | null>(null);
   const [errorFindingProduct, setErrorFindingProduct] = useState<boolean>(false);
   const [quantity, setQuantity] = useState(cartItemData.quantity);
 
-  // useEffect(() => {
-  //   if (databaseContext === null || product !== null) return;
+  useEffect(() => {
+    if (databaseContext === null || product !== null) return;
 
-  //   async function fetchProduct() {
-  //     if (databaseContext === null) return;
+    async function fetchProduct() {
+      if (databaseContext === null) return;
 
-  //     const p = await databaseContext.getProduct(cartItemData.productId, onError);
-  //     setProduct(p);
-  //   }
+      const p = await databaseContext.getProduct(cartItemData.productId, onError);
+      setProduct(p);
+    }
 
-  //   function onError() {
-  //     setErrorFindingProduct(true);
-  //   }
+    function onError() {
+      setErrorFindingProduct(true);
+    }
 
-  //   fetchProduct();
-  // }, [databaseContext, product, cartItemData.productId]);
+    fetchProduct();
+  }, [databaseContext, product, cartItemData.productId]);
 
   if (errorFindingProduct) {
     return (
@@ -82,7 +82,6 @@ const CartItem: React.FC<Props> = ({ cartItemData, lastItem, refreshItems, produ
             if (databaseContext === null) return;
             setQuantity(q);
             databaseContext.updateQuantityInCart(cartItemData.productId, q);
-            refreshItems();
           }}
         />
         <button
