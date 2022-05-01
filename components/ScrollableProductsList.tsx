@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ProductListing } from "../pages/product/[id]";
 import unloadedImg from "../public/img/unloaded-image.png";
+import ScrollableProductsListItem from "./ScrollableProductsListItem";
 
 type Props = {
   listHeading: string;
@@ -40,24 +41,7 @@ const ScrollableProductsList: React.FC<Props> = ({ listHeading, products }) => {
             </>
           ) : (
             products.map((product) => (
-              <div key={product.productId} className="w-44">
-                <Link passHref href={`/product/${product.productId}`}>
-                  <a>
-                    <Image
-                      src={product.thumbnailImgUrl}
-                      width={640}
-                      height={425}
-                      alt={product.title}
-                    />
-                  </a>
-                </Link>
-                <div className="flex flex-col justify-between">
-                  <Link href={`/product/${product.productId}`}>
-                    <a className="text-md">{product.title}</a>
-                  </Link>
-                  <p className="text-sm">${product.price}</p>
-                </div>
-              </div>
+              <ScrollableProductsListItem key={product.productId} product={product} />
             ))
           )}
         </div>

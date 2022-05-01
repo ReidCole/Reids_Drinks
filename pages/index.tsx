@@ -52,7 +52,7 @@ const Home: NextPage = () => {
           </>
         )}
 
-        <FeaturedProduct product={products[0]} />
+        <FeaturedProduct product={products.length > 0 ? products[0] : null} />
 
         <ScrollableProductsList listHeading="New" products={products} />
 

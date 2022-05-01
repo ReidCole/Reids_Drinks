@@ -40,16 +40,16 @@ const SignInForm: React.FC<Props> = ({ isCreatingAccount, onSubmit }) => {
         />
       </label>
 
-      <button
-        data-cy="signin-submitbtn"
-        type="submit"
-        className={
-          "py-2 font text-white rounded-lg " + (canSignIn ? "bg-green-700" : "bg-gray-700")
-        }
-        disabled={!canSignIn}
-      >
-        {isCreatingAccount ? "Create New Account" : "Sign In"}
-      </button>
+      {canSignIn && (
+        <button
+          data-cy="signin-submitbtn"
+          type="submit"
+          className="py-2 font text-white rounded-lg bg-green-700"
+          disabled={!canSignIn}
+        >
+          {isCreatingAccount ? "Create New Account" : "Sign In"}
+        </button>
+      )}
     </form>
   );
 };

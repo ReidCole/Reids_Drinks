@@ -66,7 +66,7 @@ const Account: NextPage = () => {
             You are not signed in. Please sign in to manage your account.
           </p>
           <Link href="/signin?prevRoute=/account">
-            <a className="bg-gray-600 text-white py-2 w-60 rounded-lg mb-4 text-center">Sign In</a>
+            <a className="bg-green-700 text-white py-2 w-60 rounded-lg mb-4 text-center">Sign In</a>
           </Link>
         </div>
       )}

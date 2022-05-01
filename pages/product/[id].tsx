@@ -3,10 +3,13 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
+import { BsStarFill } from "react-icons/bs";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Modal from "../../components/Modal";
 import Notification from "../../components/Notification";
+import ProductQuantity from "../../components/ProductQuantity";
+import ProductRating from "../../components/ProductRating";
 import { DatabaseContext } from "../../context/DatabaseContext";
 import useNotificationState from "../../hooks/useNotificationState";
 import unloadedImg from "../../public/img/unloaded-image.png";
@@ -14,12 +17,13 @@ import unloadedImg from "../../public/img/unloaded-image.png";
 export type ProductListing = {
   title: string;
   description: string;
-  price: string;
+  price: number;
   thumbnailImgUrl: string;
   highResImgUrl: string;
   imgAttribution: string;
   productId: string;
   rating: number;
+  tagline: string;
 };
 
 const Product: NextPage = () => {
@@ -27,14 +31,13 @@ const Product: NextPage = () => {
   const [product, setProduct] = useState<ProductListing | null>(null);
   const [notifState, showNotif] = useNotificationState();
   const [errorFindingProduct, setErrorFindingProduct] = useState(false);
-  const [quantity, setQuantity] = useState("1");
+  const [quantity, setQuantity] = useState<number>(1);
   const [buyModalOpen, setBuyModalOpen] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
     if (product !== null || typeof id === "undefined") return;
-    console.log("effect", databaseContext, id, product);
     async function fetchProduct() {
       if (databaseContext === null) return;
 
@@ -52,8 +55,7 @@ const Product: NextPage = () => {
   }, [databaseContext, id, product]);
 
   function quantityIsValid(): boolean {
-    const quantityInteger = parseInt(quantity);
-    if (Number.isNaN(quantityInteger) || quantityInteger < 1) {
+    if (Number.isNaN(quantity) || quantity < 1) {
       return false;
     }
     return true;
@@ -69,12 +71,19 @@ const Product: NextPage = () => {
   }
 
   function onAddToCart() {
+    if (product === null || databaseContext === null) return;
+
     if (!quantityIsValid()) {
       showNotif("Please input a valid quantity.", "bg-red-600");
       return;
     }
 
-    showNotif(`Added ${quantity} item${quantity !== "1" ? "s" : ""} to cart.`, "bg-green-600");
+    databaseContext.addToCart(product.productId, quantity);
+
+    showNotif(
+      `Added ${quantity} ${product.title}${quantity !== 1 ? "s" : ""} to your cart.`,
+      "bg-green-600"
+    );
     return;
   }
 
@@ -106,21 +115,17 @@ const Product: NextPage = () => {
 
             <div className="flex flex-col mb-4">
               <h1 className="text-2xl font-bold">{product ? product.title : "..."}</h1>
-              <p className="">{product ? `\$${product.price}` : "..."}</p>
+              <p className="mb-2">{product ? `\$${product.price.toFixed(2)}` : "..."}</p>
+              <ProductRating rating={product ? product.rating : 0} />
             </div>
 
             <div>
-              <label className="bg-gray-200 p-2 rounded-lg flex flex-row items-center w-36 gap-2 mb-4">
-                <p>Quantity</p>
-                <input
-                  className="bg-white rounded-lg text-left pl-2 w-full"
-                  type="number"
-                  value={quantity}
-                  onChange={(e) => {
-                    setQuantity(e.target.value);
-                  }}
-                />
-              </label>
+              <ProductQuantity
+                quantity={quantity}
+                setQuantity={setQuantity}
+                className="mb-4 w-32"
+              />
+
               <div className="flex flex-row w-full gap-2 mb-6">
                 <button
                   onClick={onBuy}

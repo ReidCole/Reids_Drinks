@@ -107,16 +107,16 @@ const Authenticate: NextPage = () => {
             />
           </label>
 
-          <button
-            data-cy="authenticate-submitbtn"
-            type="submit"
-            className={
-              "py-2 font-bold text-white rounded-lg " + (canSignIn ? "bg-green-700" : "bg-gray-700")
-            }
-            disabled={!canSignIn}
-          >
-            Authenticate
-          </button>
+          {canSignIn && (
+            <button
+              data-cy="authenticate-submitbtn"
+              type="submit"
+              className="py-2 font-bold text-white rounded-lg bg-green-700"
+              disabled={!canSignIn}
+            >
+              Authenticate
+            </button>
+          )}
         </form>
 
         <Notification state={notifState} />

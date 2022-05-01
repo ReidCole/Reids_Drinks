@@ -48,8 +48,17 @@ describe("Mobile screen tests", () => {
     // should be on sign in page now
     cy.url().should("include", "/signin");
 
-    // sign in button should be disabled
-    cy.get("[data-cy=signin-submitbtn]").should("be.disabled");
+    // sign in button should not exist
+    cy.get("[data-cy=signin-submitbtn]").should("not.exist");
+
+    // set email
+    cy.get("[data-cy=input-email]").type("a@a.com");
+
+    // set password
+    cy.get("[data-cy=input-password]").type("123456");
+
+    // sign in button should now exist
+    cy.get("[data-cy=signin-submitbtn]");
 
     // go to create account tab
     cy.get("[data-cy=createaccount-tab]").click();
@@ -62,12 +71,6 @@ describe("Mobile screen tests", () => {
 
     // submit button should now say Sign In
     cy.get("[data-cy=signin-submitbtn]").contains("Sign In");
-
-    // set email
-    cy.get("[data-cy=input-email]").type("a@a.com");
-
-    // set password
-    cy.get("[data-cy=input-password]").type("123456");
 
     // click sign in button
     cy.get("[data-cy=signin-submitbtn]").click();
@@ -161,20 +164,17 @@ describe("Mobile screen tests", () => {
     cy.contains("You are currently signed in as b@b.com");
   });
 
-  it("should tell the user to sign in when they go to routes that require being signed in");
-});
+  it("should tell the user to sign in when they go to routes that require being signed in", () => {
+    // account page
+    cy.visit("localhost:3000/account");
 
-describe("Desktop screen tests", () => {
-  // it("desktop - should show the header on the home page", () => {
-  //   // set viewport to desktop screen dimensions
-  //   cy.viewport(1000, 720);
-  //   // get site logo
-  //   cy.get("[data-cy=header-logo]");
-  //   // get search bar
-  //   cy.get("[data-cy=header-searchbar]");
-  //   // get cart button
-  //   cy.get("[data-cy=header-cartbtn]");
-  //   // get account button
-  //   cy.get("[data-cy=header-accountbtn]");
-  // });
+    // should say you need to sign in
+    cy.contains("You are not signed in.");
+
+    // delete account page
+    cy.visit("localhost:3000/deleteaccount");
+
+    // should say you need to sign in
+    cy.contains("You must Sign In to an account to delete it.");
+  });
 });
