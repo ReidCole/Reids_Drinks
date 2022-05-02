@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
+import Button from "../components/Button";
 import Modal from "../components/Modal";
 import Notification from "../components/Notification";
 import { AuthContext } from "../context/AuthContext";
@@ -57,13 +58,13 @@ const DeleteAccount: NextPage = () => {
               out.
             </p>
 
-            <button
+            <Button
               data-cy="deleteaccount-btn"
               onClick={() => setIsModalOpen(true)}
-              className="bg-red-600 py-2 text-white rounded-lg mx-2"
+              styles="bg-red-600 text-white mx-2"
             >
               Delete Account
-            </button>
+            </Button>
           </>
         )}
         <Notification state={notifState} />
@@ -73,22 +74,22 @@ const DeleteAccount: NextPage = () => {
             Are you sure you want to delete your account? This cannot be undone.
           </p>
           <div className="absolute bottom-0 p-2 flex flex-row w-full gap-2">
-            <button
+            <Button
               data-cy="modal-cancelbtn"
               onClick={() => setIsModalOpen(false)}
-              className="bg-gray-700 text-white p-2 rounded-lg basis-full"
+              styles="bg-gray-700 text-white basis-full"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
               data-cy="modal-confirmbtn"
               onClick={() => {
                 authContext.deleteAccount(onFulfilled, onError);
               }}
-              className="bg-red-600 text-white p-2 rounded-lg basis-full"
+              styles="bg-red-600 text-white basis-full"
             >
               Delete
-            </button>
+            </Button>
           </div>
         </Modal>
       </main>

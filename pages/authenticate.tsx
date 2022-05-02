@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FormEvent, useContext, useState } from "react";
+import Button from "../components/Button";
 import Notification from "../components/Notification";
 import { AuthContext } from "../context/AuthContext";
 import useNotificationState from "../hooks/useNotificationState";
@@ -108,14 +109,9 @@ const Authenticate: NextPage = () => {
           </label>
 
           {canSignIn && (
-            <button
-              data-cy="authenticate-submitbtn"
-              type="submit"
-              className="py-2 font-bold text-white rounded-lg bg-green-700"
-              disabled={!canSignIn}
-            >
+            <Button data-cy="authenticate-submitbtn" type="submit" styles="text-white bg-green-700">
               Authenticate
-            </button>
+            </Button>
           )}
         </form>
 

@@ -19,7 +19,6 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     if (products.length !== 0 || errorFindingProducts) return;
-    console.log("effect");
 
     async function fetchProducts() {
       if (databaseContext === null) return;
@@ -35,6 +34,11 @@ const Home: NextPage = () => {
     fetchProducts();
   }, [databaseContext, products, errorFindingProducts]);
 
+  function copyOfProducts(): ProductListing[] {
+    const p = products.slice();
+    return p;
+  }
+
   return (
     <>
       <Head>
@@ -48,15 +52,43 @@ const Home: NextPage = () => {
           <p className="p-2">Couldn&apos;t get products from database. Please try again later.</p>
         ) : (
           <>
-            <ScrollableProductsList listHeading="Popular" products={products} />
+            <ScrollableProductsList
+              listHeading="Popular"
+              products={copyOfProducts().sort((a, b) => {
+                const val = a.rating - b.rating;
+                if (val < 0) return 1;
+                else if (val === 0) return 0;
+                else return -1;
+              })}
+            />
           </>
         )}
 
-        <FeaturedProduct product={products.length > 0 ? products[0] : null} />
+        <FeaturedProduct
+          product={
+            products.length > 0 ? products[Math.round(Math.random() * (products.length - 1))] : null
+          }
+        />
 
-        <ScrollableProductsList listHeading="New" products={products} />
+        <ScrollableProductsList
+          listHeading="Price"
+          products={copyOfProducts().sort((a, b) => {
+            const val = a.price - b.price;
+            if (val < 0) return -1;
+            else if (val === 0) return 0;
+            else return 1;
+          })}
+        />
 
-        <ScrollableProductsList listHeading="Unique" products={products} />
+        <ScrollableProductsList
+          listHeading="Unique"
+          products={copyOfProducts().sort((a, b) => {
+            const val = a.rating - b.rating;
+            if (val < 0) return -1;
+            else if (val === 0) return 0;
+            else return 1;
+          })}
+        />
 
         <Footer />
       </main>

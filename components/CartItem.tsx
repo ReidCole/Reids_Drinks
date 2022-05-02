@@ -53,8 +53,8 @@ const CartItem: React.FC<Props> = ({ cartItemData, lastItem, refreshItems }) => 
   return (
     <div
       className={
-        "grid grid-cols-2 gap-3 p-2 pb-4 relative " +
-        (lastItem ? "mt-2" : "border-b-2 border-green-700")
+        "grid grid-cols-2 gap-3 p-2 py-4 relative " +
+        (lastItem ? "" : "border-b-2 border-green-700")
       }
     >
       <div className="flex flex-col">

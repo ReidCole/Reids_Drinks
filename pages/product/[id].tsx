@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { BsStarFill } from "react-icons/bs";
+import Button from "../../components/Button";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Modal from "../../components/Modal";
@@ -127,18 +128,12 @@ const Product: NextPage = () => {
               />
 
               <div className="flex flex-row w-full gap-2 mb-6">
-                <button
-                  onClick={onBuy}
-                  className="py-2 px-4 bg-blue-600  rounded-lg text-white basis-full"
-                >
+                <Button onClick={onBuy} styles="bg-blue-600 text-white basis-full">
                   Buy Now
-                </button>
-                <button
-                  onClick={onAddToCart}
-                  className="py-2 px-4 bg-green-700 rounded-lg text-white basis-full"
-                >
+                </Button>
+                <Button onClick={onAddToCart} styles="bg-green-700 text-white basis-full">
                   Add To Cart
-                </button>
+                </Button>
               </div>
             </div>
             <hr className="border-b border-gray-700 mb-6" />
@@ -154,13 +149,13 @@ const Product: NextPage = () => {
             still add items to your cart and view them, though.
           </p>
           <div className="absolute bottom-0 p-2 flex flex-row w-full gap-2">
-            <button
+            <Button
               data-cy="modal-cancelbtn"
               onClick={() => setBuyModalOpen(false)}
-              className="bg-green-700 text-white p-2 rounded-lg basis-full"
+              styles="bg-green-700 basis-full text-white"
             >
               How rude...
-            </button>
+            </Button>
           </div>
         </Modal>
 

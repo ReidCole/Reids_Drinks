@@ -7,21 +7,12 @@ import {
   getDocs,
   query,
   QueryDocumentSnapshot,
+  setDoc,
   where,
 } from "firebase/firestore";
 import React from "react";
 import { CartItemData } from "../components/CartItem";
 import { ProductListing } from "../pages/product/[id]";
-
-type ContextType = {
-  getProduct(id: string, onError: () => void): Promise<ProductListing | null>;
-  getAllProducts(onError: () => void): Promise<ProductListing[]>;
-  addToCart(productId: string, quantity: number): void;
-  getAllCartItemDatas(): CartItemData[];
-  updateQuantityInCart(productId: string, quantity: number): void;
-  removeItemFromCart(productId: string): void;
-  getProductsFromCart(cartItems: CartItemData[]): Promise<ProductListing[]>;
-};
 
 export const DatabaseContext = React.createContext<ContextType | null>(null);
 
@@ -175,6 +166,12 @@ const DatabaseProvider: React.FC<Props> = ({ children, db }) => {
     localStorage.setItem("cart-items", jsonString);
   }
 
+  function dev_uploadProduct(product: ProductListing) {
+    console.log("eoifwj");
+    const docRef = doc(db, `products/${product.productId}`);
+    setDoc(docRef, product);
+  }
+
   const value: ContextType = {
     getProduct: getProduct,
     getAllProducts: getAllProducts,
@@ -183,9 +180,21 @@ const DatabaseProvider: React.FC<Props> = ({ children, db }) => {
     updateQuantityInCart: updateQuantityInCart,
     removeItemFromCart: removeItemFromCart,
     getProductsFromCart: getProductsFromCart,
+    dev_uploadProduct: dev_uploadProduct,
   };
 
   return <DatabaseContext.Provider value={value}>{children}</DatabaseContext.Provider>;
+};
+
+type ContextType = {
+  getProduct(id: string, onError: () => void): Promise<ProductListing | null>;
+  getAllProducts(onError: () => void): Promise<ProductListing[]>;
+  addToCart(productId: string, quantity: number): void;
+  getAllCartItemDatas(): CartItemData[];
+  updateQuantityInCart(productId: string, quantity: number): void;
+  removeItemFromCart(productId: string): void;
+  getProductsFromCart(cartItems: CartItemData[]): Promise<ProductListing[]>;
+  dev_uploadProduct(product: ProductListing): void;
 };
 
 export default DatabaseProvider;
