@@ -56,6 +56,7 @@ const CartItem: React.FC<Props> = ({ cartItemData, lastItem, refreshItems }) => 
         "grid grid-cols-2 gap-3 p-2 py-4 relative " +
         (lastItem ? "" : "border-b-2 border-green-700")
       }
+      data-cy="cart-item"
     >
       <div className="flex flex-col">
         <Link passHref href={product ? `product/${product.productId}` : ""}>
@@ -92,6 +93,7 @@ const CartItem: React.FC<Props> = ({ cartItemData, lastItem, refreshItems }) => 
             databaseContext.removeItemFromCart(cartItemData.productId);
             refreshItems();
           }}
+          data-cy="cart-itemdeletebtn"
         >
           <BsTrashFill className="w-6 h-6 text-red-600" />
           Delete

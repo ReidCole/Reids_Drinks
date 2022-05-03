@@ -16,7 +16,9 @@ const ScrollableProductsListItem: React.FC<Props> = ({ product }) => {
       </Link>
       <div className="flex flex-col justify-between">
         <Link href={`/product/${product.productId}`}>
-          <a className="text-md">{product.title}</a>
+          <a data-cy="scrollableproductlist-link" className="text-md">
+            {product.title}
+          </a>
         </Link>
         <p className="text-sm">${product.price.toFixed(2)}</p>
       </div>

@@ -128,11 +128,17 @@ const Product: NextPage = () => {
               />
 
               <div className="flex flex-row w-full gap-2 mb-6">
-                <Button onClick={onBuy} styles="bg-blue-600 text-white basis-full">
-                  Buy Now
+                <Button
+                  onClick={product ? onBuy : () => {}}
+                  styles="bg-blue-600 text-white basis-full"
+                >
+                  {product ? "Buy Now" : "..."}
                 </Button>
-                <Button onClick={onAddToCart} styles="bg-green-700 text-white basis-full">
-                  Add To Cart
+                <Button
+                  onClick={product ? onAddToCart : () => {}}
+                  styles="bg-green-700 text-white basis-full"
+                >
+                  {product ? "Add To Cart" : "..."}
                 </Button>
               </div>
             </div>
@@ -150,7 +156,6 @@ const Product: NextPage = () => {
           </p>
           <div className="absolute bottom-0 p-2 flex flex-row w-full gap-2">
             <Button
-              data-cy="modal-cancelbtn"
               onClick={() => setBuyModalOpen(false)}
               styles="bg-green-700 basis-full text-white"
             >
