@@ -14,28 +14,12 @@ import { ProductListing } from "./product/[id]";
 
 const Home: NextPage = () => {
   const databaseContext = useContext(DatabaseContext);
-  const [products, setProducts] = useState<ProductListing[]>([]);
   const [errorFindingProducts, setErrorFindingProducts] = useState(false);
 
-  useEffect(() => {
-    if (products.length !== 0 || errorFindingProducts) return;
-
-    async function fetchProducts() {
-      if (databaseContext === null) return;
-
-      const p = await databaseContext.getAllProducts(onError);
-      setProducts(p);
-    }
-
-    function onError() {
-      setErrorFindingProducts(true);
-    }
-
-    fetchProducts();
-  }, [databaseContext, products, errorFindingProducts]);
-
   function copyOfProducts(): ProductListing[] {
-    const p = products.slice();
+    if (databaseContext === null) return [];
+
+    const p = databaseContext.allProducts.slice();
     return p;
   }
 
@@ -66,7 +50,11 @@ const Home: NextPage = () => {
 
         <FeaturedProduct
           product={
-            products.length > 0 ? products[Math.round(Math.random() * (products.length - 1))] : null
+            databaseContext && databaseContext.allProducts.length > 0
+              ? databaseContext.allProducts[
+                  Math.round(Math.random() * (databaseContext.allProducts.length - 1))
+                ]
+              : null
           }
         />
 

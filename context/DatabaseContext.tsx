@@ -10,7 +10,7 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CartItemData } from "../components/CartItem";
 import { ProductListing } from "../pages/product/[id]";
 
@@ -22,6 +22,28 @@ type Props = {
 };
 
 const DatabaseProvider: React.FC<Props> = ({ children, db }) => {
+  const [allProducts, setAllProducts] = useState<ProductListing[]>([]);
+
+  useEffect(() => {
+    async function getAllProducts() {
+      const q = query(collection(db, "products"));
+      const querySnapshot = await getDocs(q);
+      const products: ProductListing[] = [];
+      querySnapshot.forEach((docSnap) => {
+        const product = getProductFromSnapshot(docSnap);
+        products.push(product);
+      });
+      if (products.length === 0) {
+        console.error("Couldn't get all products from database");
+        return [];
+      }
+
+      setAllProducts(products);
+    }
+
+    getAllProducts();
+  }, [db]);
+
   async function getProduct(id: string, onError: () => void) {
     const docRef = doc(db, `products/${id}`);
     const docSnap = await getDoc(docRef);
@@ -33,22 +55,6 @@ const DatabaseProvider: React.FC<Props> = ({ children, db }) => {
       onError();
       return null;
     }
-  }
-
-  async function getAllProducts(onError: () => void) {
-    const q = query(collection(db, "products"));
-    const querySnapshot = await getDocs(q);
-    const products: ProductListing[] = [];
-    querySnapshot.forEach((docSnap) => {
-      const product = getProductFromSnapshot(docSnap);
-      products.push(product);
-    });
-    if (products.length === 0) {
-      onError();
-      return [];
-    }
-
-    return products;
   }
 
   function addToCart(productId: string, quantity: number) {
@@ -174,7 +180,7 @@ const DatabaseProvider: React.FC<Props> = ({ children, db }) => {
 
   const value: ContextType = {
     getProduct: getProduct,
-    getAllProducts: getAllProducts,
+    allProducts: allProducts,
     addToCart: addToCart,
     getAllCartItemDatas: getAllCartItemDatas,
     updateQuantityInCart: updateQuantityInCart,
@@ -188,7 +194,7 @@ const DatabaseProvider: React.FC<Props> = ({ children, db }) => {
 
 type ContextType = {
   getProduct(id: string, onError: () => void): Promise<ProductListing | null>;
-  getAllProducts(onError: () => void): Promise<ProductListing[]>;
+  allProducts: ProductListing[];
   addToCart(productId: string, quantity: number): void;
   getAllCartItemDatas(): CartItemData[];
   updateQuantityInCart(productId: string, quantity: number): void;

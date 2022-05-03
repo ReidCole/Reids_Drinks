@@ -38,7 +38,8 @@ const Product: NextPage = () => {
   const { id } = router.query;
 
   useEffect(() => {
-    if (product !== null || typeof id === "undefined") return;
+    if (typeof id === "undefined") return;
+
     async function fetchProduct() {
       if (databaseContext === null) return;
 
@@ -53,7 +54,7 @@ const Product: NextPage = () => {
     }
 
     fetchProduct();
-  }, [databaseContext, id, product]);
+  }, [databaseContext, id]);
 
   function quantityIsValid(): boolean {
     if (Number.isNaN(quantity) || quantity < 1) {
