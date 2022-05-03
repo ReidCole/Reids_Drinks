@@ -25,12 +25,12 @@ const FeaturedProduct: React.FC<Props> = ({ product }) => {
   }
 
   return (
-    <div className="flex flex-col p-4 border-b-2 border-green-700">
-      <div>
-        <h2 className="text-xl font-bold">{product ? product.title : "..."}</h2>
-        <p className="mb-2">{product ? "$" + product.price.toFixed(2) : "..."}</p>
-        <p className="h-10 truncate">{product ? product.tagline : "..."}</p>
-        <div className="flex flex-row mb-4 gap-2">
+    <div className="flex flex-col p-4 border-b-2 border-green-700 sm:grid sm:grid-cols-2 sm:gap-4 sm:items-center">
+      <div className="h-full relative">
+        <h2 className="text-xl font-bold sm:text-2xl">{product ? product.title : "..."}</h2>
+        <p className="mb-2 sm:text-lg">{product ? "$" + product.price.toFixed(2) : "..."}</p>
+        <p className="h-10 truncate sm:text-lg">{product ? product.tagline : "..."}</p>
+        <div className="flex flex-row mb-4 gap-2 sm:absolute sm:bottom-0 sm:mb-0">
           <Button styles="bg-green-700 text-white" onClick={onAddToCart}>
             Add To Cart
           </Button>
@@ -44,7 +44,7 @@ const FeaturedProduct: React.FC<Props> = ({ product }) => {
       </div>
       <div className="w-full relative">
         <Link passHref href={product ? `product/${product.productId}` : "/"}>
-          <a>
+          <a className="flex">
             <Image
               src={product ? product.highResImgUrl : unloadedImg}
               width={640}
