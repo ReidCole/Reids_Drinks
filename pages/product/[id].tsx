@@ -105,13 +105,15 @@ const Product: NextPage = () => {
         ) : (
           <div className="flex flex-col p-4 items-center">
             <div className="w-full flex flex-col items-center md:flex-row md:gap-4 relative max-w-6xl">
-              <div className="flex flex-col mb-3 product-img relative">
-                {product ? (
-                  <Image src={product.highResImgUrl} layout="fill" alt={product.title} />
-                ) : (
-                  <Image src={unloadedImg} layout="fill" alt="" />
-                )}
-                <p className="italic text-gray-700 text-sm mt-2">
+              <div className="w-full">
+                <div className="flex flex-col mb-3 product-img relative">
+                  {product ? (
+                    <Image src={product.highResImgUrl} layout="fill" alt={product.title} />
+                  ) : (
+                    <Image src={unloadedImg} layout="fill" alt="" />
+                  )}
+                </div>
+                <p className="italic text-gray-700 text-sm w-full">
                   {product ? product.imgAttribution : "..."}
                 </p>
               </div>
