@@ -58,13 +58,15 @@ const DeleteAccount: NextPage = () => {
               out.
             </p>
 
-            <Button
-              data-cy="deleteaccount-btn"
-              onClick={() => setIsModalOpen(true)}
-              styles="bg-red-600 text-white mx-2"
-            >
-              Delete Account
-            </Button>
+            <div className="max-w-sm mx-auto flex flex-col w-full p-2">
+              <button
+                data-cy="deleteaccount-btn"
+                onClick={() => setIsModalOpen(true)}
+                className="py-2 text-white rounded-lg bg-red-600"
+              >
+                Delete Account
+              </button>
+            </div>
           </>
         )}
         <Notification state={notifState} />

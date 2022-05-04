@@ -38,21 +38,21 @@ const Header: React.FC = () => {
         <HeaderSearchbar />
 
         <Link passHref href="/cart">
-          <a className="gap-1 items-center whitespace-nowrap hidden sm:flex sm:flex-row p-2 bg-green-700 text-white rounded-lg">
+          <a className="gap-1 items-center whitespace-nowrap hidden sm:flex sm:flex-row p-2 bg-green-700 text-white rounded-lg ">
             <BsCart className="w-7 h-7" />
             Cart
           </a>
         </Link>
         {authContext && authContext.user ? (
           <Link passHref href="/account">
-            <a className="flex-row gap-1 items-center whitespace-nowrap hidden sm:flex sm:flex-row p-2 bg-green-700 text-white rounded-lg">
+            <a className="flex-row gap-1 items-center whitespace-nowrap hidden sm:flex sm:flex-row p-2 bg-green-700 text-white rounded-lg ">
               <BsPerson className="w-7 h-7" />
               Account
             </a>
           </Link>
         ) : (
           <Link passHref href="/signin">
-            <a className="flex-row gap-1 items-center whitespace-nowrap hidden sm:flex sm:flex-row p-2 bg-green-700 text-white rounded-lg">
+            <a className="flex-row gap-1 items-center whitespace-nowrap hidden sm:flex sm:flex-row p-2 bg-green-700 text-white rounded-lg ">
               <BsPerson className="w-7 h-7" />
               Sign In
             </a>
@@ -62,7 +62,7 @@ const Header: React.FC = () => {
         {authContext && authContext.user && (
           <button
             onClick={() => authContext.signOut()}
-            className="flex-row gap-1 items-center whitespace-nowrap hidden sm:flex sm:flex-row p-2 bg-green-700 text-white rounded-lg"
+            className="flex-row gap-1 items-center whitespace-nowrap hidden sm:flex sm:flex-row p-2 bg-green-700 text-white rounded-lg "
           >
             <BsDoorOpen className="w-7 h-7" />
             Sign Out

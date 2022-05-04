@@ -19,7 +19,7 @@ const Sidebar: React.FC<Props> = ({ isVisible, setIsVisible }) => {
     <>
       {isVisible && (
         <div
-          className="bg-black opacity-70 w-screen h-screen fixed top-0 left-0 z-20"
+          className="bg-black opacity-70 w-screen h-screen fixed top-0 left-0 z-20 sm:hidden"
           onClick={() => setIsVisible(false)}
           data-cy="sidebar-background"
         />
@@ -27,7 +27,7 @@ const Sidebar: React.FC<Props> = ({ isVisible, setIsVisible }) => {
 
       <div
         className={
-          "transition-transform fixed bg-white top-0 left-0 w-60 h-screen flex flex-col z-20 " +
+          "transition-transform fixed bg-white top-0 left-0 w-60 h-screen flex flex-col z-20 sm:hidden " +
           (!isVisible && "-translate-x-60")
         }
         data-cy="sidebar"

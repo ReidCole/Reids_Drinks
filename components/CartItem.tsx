@@ -53,7 +53,7 @@ const CartItem: React.FC<Props> = ({ cartItemData, lastItem, refreshItems }) => 
   return (
     <div
       className={
-        "grid grid-cols-2 gap-3 p-2 py-4 relative " +
+        "grid grid-cols-2 gap-3 p-2 py-4 relative max-w-4xl mx-auto " +
         (lastItem ? "" : "border-b-2 border-green-700")
       }
       data-cy="cart-item"
@@ -72,9 +72,11 @@ const CartItem: React.FC<Props> = ({ cartItemData, lastItem, refreshItems }) => 
       </div>
       <div className="flex flex-col">
         <Link passHref href={product ? `product/${product.productId}` : ""}>
-          <a className="text-lg font-bold">{product ? product.title : "..."}</a>
+          <a className="text-lg md:text-xl font-bold">{product ? product.title : "..."}</a>
         </Link>
-        <p className="mb-2">{product ? `\$${(product.price * quantity).toFixed(2)}` : "..."}</p>
+        <p className="mb-2 md:text-lg">
+          {product ? `\$${(product.price * quantity).toFixed(2)}` : "..."}
+        </p>
 
         <ProductQuantity
           className="w-28 h-7"

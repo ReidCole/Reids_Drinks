@@ -22,13 +22,11 @@ const Notification: React.FC<Props> = ({ state }) => {
 
   return (
     <div
-      className={
-        "fixed bottom-0 left-0 w-full notification z-10 " + (isOpen ? "notification-open" : "")
-      }
+      className={"fixed bottom-0 w-full notification z-10 " + (isOpen ? "notification-open" : "")}
     >
       <p
         className={
-          "text-white px-2 py-4 m-3 text-center shadow-xl shadow-black " +
+          "text-white px-2 py-4 m-3 text-center shadow-xl shadow-black md:w-96 md:mx-auto " +
           (state.styles ? state.styles : "bg-gray-600")
         }
       >

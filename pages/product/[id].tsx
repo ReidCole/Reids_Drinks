@@ -103,48 +103,52 @@ const Product: NextPage = () => {
             <p className="p-2">Couldn&apos;t find requested product</p>
           </div>
         ) : (
-          <div className="flex flex-col p-4">
-            <div className="flex flex-col mb-3">
-              {product ? (
-                <Image src={product.highResImgUrl} width={640} height={425} alt={product.title} />
-              ) : (
-                <Image src={unloadedImg} width={640} height={425} alt="" />
-              )}
-              <p className="italic text-gray-700 text-sm mt-2">
-                {product ? product.imgAttribution : "..."}
-              </p>
-            </div>
+          <div className="flex flex-col p-4 items-center">
+            <div className="w-full flex flex-col items-center md:flex-row md:gap-4 relative max-w-6xl">
+              <div className="flex flex-col mb-3 product-img relative">
+                {product ? (
+                  <Image src={product.highResImgUrl} layout="fill" alt={product.title} />
+                ) : (
+                  <Image src={unloadedImg} layout="fill" alt="" />
+                )}
+                <p className="italic text-gray-700 text-sm mt-2">
+                  {product ? product.imgAttribution : "..."}
+                </p>
+              </div>
 
-            <div className="flex flex-col mb-4">
-              <h1 className="text-2xl font-bold">{product ? product.title : "..."}</h1>
-              <p className="mb-2">{product ? `\$${product.price.toFixed(2)}` : "..."}</p>
-              <ProductRating rating={product ? product.rating : 0} />
-            </div>
+              <div className="w-full">
+                <div className="flex flex-col mb-4 w-full">
+                  <h1 className="text-2xl font-bold">{product ? product.title : "..."}</h1>
+                  <p className="mb-2">{product ? `\$${product.price.toFixed(2)}` : "..."}</p>
+                  <ProductRating rating={product ? product.rating : 0} />
+                </div>
 
-            <div>
-              <ProductQuantity
-                quantity={quantity}
-                setQuantity={setQuantity}
-                className="mb-4 w-32"
-              />
+                <div className="w-full">
+                  <ProductQuantity
+                    quantity={quantity}
+                    setQuantity={setQuantity}
+                    className="mb-4 w-32"
+                  />
 
-              <div className="flex flex-row w-full gap-2 mb-6">
-                <Button
-                  onClick={product ? onBuy : () => {}}
-                  styles="bg-blue-600 text-white basis-full"
-                >
-                  {product ? "Buy Now" : "..."}
-                </Button>
-                <Button
-                  onClick={product ? onAddToCart : () => {}}
-                  styles="bg-green-700 text-white basis-full"
-                >
-                  {product ? "Add To Cart" : "..."}
-                </Button>
+                  <div className="flex flex-row w-full gap-2 mb-6">
+                    <Button
+                      onClick={product ? onBuy : () => {}}
+                      styles="bg-blue-600 text-white basis-full"
+                    >
+                      {product ? "Buy Now" : "..."}
+                    </Button>
+                    <Button
+                      onClick={product ? onAddToCart : () => {}}
+                      styles="bg-green-700 text-white basis-full"
+                    >
+                      {product ? "Add To Cart" : "..."}
+                    </Button>
+                  </div>
+                </div>
               </div>
             </div>
-            <hr className="border-b border-gray-700 mb-6" />
-            <div className="mb-8">
+            <hr className="border-b border-gray-700 mb-6 md:mt-6 w-full max-w-6xl" />
+            <div className="mb-8 max-w-6xl">
               <p>{product ? product.description : "..."}</p>
             </div>
           </div>

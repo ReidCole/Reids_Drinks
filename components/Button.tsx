@@ -13,7 +13,7 @@ const Button: React.FC<Props> = ({ children, styles, onClick, href, type }) => {
   if (href) {
     return (
       <Link href={href} passHref>
-        <a className={"px-4 py-2 rounded-lg text-center " + styles}>{children}</a>
+        <a className={"px-4 py-2 rounded-lg text-center " + styles + "  text-white"}>{children}</a>
       </Link>
     );
   }
@@ -22,7 +22,7 @@ const Button: React.FC<Props> = ({ children, styles, onClick, href, type }) => {
       data-cy="button"
       type={type ? type : "button"}
       onClick={onClick}
-      className={"px-4 py-2 rounded-lg text-center " + styles}
+      className={"px-4 py-2 rounded-lg text-center " + styles + "  text-white"}
     >
       {children}
     </button>

@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 import { NextPage } from "next";
 import { FormEvent, FormEventHandler, useContext, useRef } from "react";
 import { DatabaseContext } from "../context/DatabaseContext";
-import { ProductListing } from "./product/[id]";
+import { ProductListing } from "../pages/product/[id]";
 
 const Dev: NextPage = () => {
   const databaseContext = useContext(DatabaseContext);

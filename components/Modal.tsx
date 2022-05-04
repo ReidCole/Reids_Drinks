@@ -32,7 +32,7 @@ const Modal: React.FC<Props> = ({ children, heading, isOpen, setIsOpen }) => {
         }
         id="modal-background"
       >
-        <div className="bg-white w-2/3 h-1/2 min-w-min overflow-y-scroll flex flex-col relative">
+        <div className="bg-white w-2/3 h-1/2 min-w-min flex flex-col relative md:w-96 md:h-96">
           <h1 className="bg-gray-300 text-center p-2 text-xl font-bold">{heading}</h1>
           {children}
         </div>

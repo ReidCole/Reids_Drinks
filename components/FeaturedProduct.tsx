@@ -25,12 +25,13 @@ const FeaturedProduct: React.FC<Props> = ({ product }) => {
   }
 
   return (
-    <div className="flex flex-col p-4 border-b-2 border-green-700 sm:grid sm:grid-cols-2 sm:gap-4 sm:items-center">
-      <div className="h-full relative">
+    // give div a max height
+    <div className="flex flex-col p-4 border-b-2 border-green-700 sm:flex-row sm:gap-4 ">
+      <div className="relative sm:order-1 sm:w-1/2">
         <h2 className="text-xl font-bold sm:text-2xl">{product ? product.title : "..."}</h2>
         <p className="mb-2 sm:text-lg">{product ? "$" + product.price.toFixed(2) : "..."}</p>
         <p className="h-10 truncate sm:text-lg">{product ? product.tagline : "..."}</p>
-        <div className="flex flex-row mb-4 gap-2 sm:absolute sm:bottom-0 sm:mb-0">
+        <div className="flex flex-row mb-4 gap-2 sm:absolute sm:bottom-0 sm:mb-0 md:text-lg">
           <Button styles="bg-green-700 text-white" onClick={onAddToCart}>
             Add To Cart
           </Button>
@@ -42,7 +43,7 @@ const FeaturedProduct: React.FC<Props> = ({ product }) => {
           </Button>
         </div>
       </div>
-      <div className="w-full relative">
+      <div className="featured-product-img">
         <Link passHref href={product ? `product/${product.productId}` : "/"}>
           <a className="flex">
             <Image

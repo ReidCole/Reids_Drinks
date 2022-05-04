@@ -49,7 +49,7 @@ const ResetPassword: NextPage = () => {
             e.preventDefault();
             authContext?.resetPassword(emailValue, onFulfilled, onError);
           }}
-          className="flex flex-col gap-4 p-2"
+          className="flex flex-col gap-4 p-2 max-w-xl mx-auto"
         >
           <label>
             Email Address

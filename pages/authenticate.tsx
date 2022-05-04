@@ -85,7 +85,7 @@ const Authenticate: NextPage = () => {
           </>
         )}
 
-        <form onSubmit={onSubmit} className="flex flex-col gap-4 mt-2 p-2">
+        <form onSubmit={onSubmit} className="flex flex-col gap-4 mt-2 p-2 max-w-xl mx-auto">
           <label>
             Email
             <input

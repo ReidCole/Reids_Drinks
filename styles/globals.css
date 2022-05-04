@@ -25,3 +25,26 @@ html {
 .modal-open {
   transform: translateY(0%);
 }
+
+.product-img {
+  aspect-ratio: 640 / 425;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .featured-product-img {
+    width: 24rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .featured-product-img {
+    width: 32rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .featured-product-img {
+    width: 40rem;
+  }
+}
