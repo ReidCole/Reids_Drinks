@@ -21,7 +21,7 @@ const FeaturedProduct: React.FC<Props> = ({ product }) => {
 
     databaseContext.addToCart(product.productId, 1);
 
-    showNotif(`Added 1 ${product.title} your cart.`, "bg-green-600");
+    showNotif(`Added 1 ${product.title} to your cart.`, "bg-green-600");
   }
 
   return (
