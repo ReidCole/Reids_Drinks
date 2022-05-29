@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
       <p>
         This website is not a real store. It is a sample website made to showcase my skills as a web
         developer. See my{" "}
-        <Link passHref href="https://cosmic-platypus-75760a.netlify.app/">
+        <Link passHref href="https://reidcole.me/">
           <a className="text-green-300 underline">portfolio site</a>
         </Link>{" "}
         for more of my samples.
