@@ -51,6 +51,8 @@ const FeaturedProduct: React.FC<Props> = ({ product }) => {
               width={640}
               height={425}
               alt={product ? product.title : ""}
+              placeholder="blur"
+              blurDataURL={unloadedImg.src}
             />
           </a>
         </Link>
