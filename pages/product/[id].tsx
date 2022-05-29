@@ -108,7 +108,13 @@ const Product: NextPage = () => {
               <div className="w-full">
                 <div className="flex flex-col mb-3 product-img relative">
                   {product ? (
-                    <Image src={product.highResImgUrl} layout="fill" alt={product.title} />
+                    <Image
+                      src={product.highResImgUrl}
+                      layout="fill"
+                      alt={product.title}
+                      blurDataURL={unloadedImg.src}
+                      placeholder="blur"
+                    />
                   ) : (
                     <Image src={unloadedImg} layout="fill" alt="" />
                   )}

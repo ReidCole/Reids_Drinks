@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { DatabaseContext } from "../context/DatabaseContext";
 import { ProductListing } from "../pages/product/[id]";
-import unloadedImgUrl from "../public/img/unloaded-image.png";
+import unloadedImg from "../public/img/unloaded-image.png";
 import ProductQuantity from "./ProductQuantity";
 import { BsTrashFill } from "react-icons/bs";
 
@@ -62,10 +62,12 @@ const CartItem: React.FC<Props> = ({ cartItemData, lastItem, refreshItems }) => 
         <Link passHref href={product ? `product/${product.productId}` : ""}>
           <a className="flex">
             <Image
-              src={product ? product.thumbnailImgUrl : unloadedImgUrl}
+              src={product ? product.thumbnailImgUrl : unloadedImg}
               width={640}
               height={425}
               alt={product ? product.title : ""}
+              blurDataURL={unloadedImg.src}
+              placeholder="blur"
             />
           </a>
         </Link>
