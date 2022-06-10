@@ -18,7 +18,6 @@ const HeaderSearchbar: React.FC = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          console.log("your mom");
         }}
         className="w-full h-full rounded-full overflow-hidden flex flex-row relative"
       >

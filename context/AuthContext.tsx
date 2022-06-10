@@ -58,7 +58,6 @@ const AuthProvider: React.FC<Props> = ({ children, auth }) => {
       } else {
         setUser(null);
       }
-      console.log("set user:", newUser);
     });
 
     return () => unsub();

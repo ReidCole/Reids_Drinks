@@ -173,7 +173,6 @@ const DatabaseProvider: React.FC<Props> = ({ children, db }) => {
   }
 
   function dev_uploadProduct(product: ProductListing) {
-    console.log("eoifwj");
     const docRef = doc(db, `products/${product.productId}`);
     setDoc(docRef, product);
   }
