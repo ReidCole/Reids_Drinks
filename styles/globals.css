@@ -8,6 +8,11 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
+*:focus-visible {
+  outline: 2px solid black;
+  outline-offset: 2px;
+}
+
 .notification {
   transition: transform 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
   transform: translateY(100%);

@@ -16,7 +16,7 @@ const ProductQuantity: React.FC<Props> = ({ quantity, setQuantity, className }) 
       data-cy="item-quantity"
     >
       <button
-        className="bg-gray-700 text-white basis-full py-1 text-xl "
+        className="bg-gray-700 text-white basis-full py-1 text-xl focus-visible:outline-none focus-visible:bg-green-500 "
         onClick={() => setQuantity(quantity === 1 ? 1 : quantity - 1)}
         data-cy="quantity-minusbtn"
       >
@@ -24,7 +24,7 @@ const ProductQuantity: React.FC<Props> = ({ quantity, setQuantity, className }) 
       </button>
       <p className="basis-full text-center">{quantity}</p>
       <button
-        className="bg-gray-700 text-white basis-full py-1 text-xl "
+        className="bg-gray-700 text-white basis-full py-1 text-xl focus-visible:outline-none focus-visible:bg-green-500 "
         onClick={() => setQuantity(quantity + 1)}
         data-cy="quantity-plusbtn"
       >

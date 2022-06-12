@@ -11,7 +11,7 @@ const ScrollableProductsListItem: React.FC<Props> = ({ product }) => {
   return (
     <div className="w-44 sm:w-48 md:w-56 xl:w-72">
       <Link passHref href={`/product/${product ? product.productId : "#"}`}>
-        <a className="flex mb-2">
+        <a className="flex mb-2" tabIndex={-1}>
           <Image
             src={product ? product.thumbnailImgUrl : unloadedImg}
             width={640}
