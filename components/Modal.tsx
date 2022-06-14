@@ -20,7 +20,7 @@ const Modal: React.FC<Props> = ({ children, heading, isOpen, setIsOpen }) => {
       {isOpen && (
         <div
           data-cy="modal-background"
-          className="fixed w-screen h-screen top-0 left-0 bg-black bg-opacity-70 z-30"
+          className="fixed w-screen h-screen top-0 left-0 bg-black bg-opacity-50 z-30"
         />
       )}
 
@@ -32,7 +32,7 @@ const Modal: React.FC<Props> = ({ children, heading, isOpen, setIsOpen }) => {
         }
         id="modal-background"
       >
-        <div className="bg-white w-2/3 h-1/2 min-w-min flex flex-col relative md:w-96 md:h-96">
+        <div className="bg-white w-2/3 h-1/2 min-w-min flex flex-col relative md:w-96 md:h-96 rounded-xl overflow-hidden">
           <h1 className="bg-gray-300 text-center p-2 text-xl font-bold">{heading}</h1>
           {children}
         </div>
