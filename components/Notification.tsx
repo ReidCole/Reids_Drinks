@@ -30,7 +30,7 @@ const Notification: React.FC<Props> = ({ state }) => {
           (state.styles ? state.styles : "bg-gray-600")
         }
       >
-        {isOpen ? state.text : ""}
+        {state.text}
       </p>
     </div>
   );

@@ -21,18 +21,18 @@ const FeaturedProduct: React.FC<Props> = ({ product }) => {
 
     databaseContext.addToCart(product.productId, 1);
 
-    showNotif(`Added 1 ${product.title} to your cart.`, "bg-green-600");
+    showNotif(`Added 1 ${product.title} to your cart.`, "bg-emerald-600");
   }
 
   return (
     // give div a max height
-    <div className="flex flex-col p-4 sm:flex-row sm:gap-4 from-white to-green-300 bg-gradient-to-r mb-4 ">
+    <div className="flex flex-col p-4 sm:flex-row sm:gap-4 from-white to-emerald-300 bg-gradient-to-r mb-4 ">
       <div className="relative sm:order-1 sm:w-1/2">
         <h2 className="text-xl font-bold sm:text-2xl">{product ? product.title : "..."}</h2>
         <p className="mb-2 sm:text-lg">{product ? "$" + product.price.toFixed(2) : "..."}</p>
         <p className="h-10 truncate sm:text-lg">{product ? product.tagline : "..."}</p>
         <div className="flex flex-row mb-4 gap-2 sm:absolute sm:bottom-0 sm:mb-0 md:text-lg">
-          <Button styles="bg-green-700 text-white" onClick={onAddToCart}>
+          <Button styles="bg-emerald-700 text-white" onClick={onAddToCart}>
             Add To Cart
           </Button>
           <Button

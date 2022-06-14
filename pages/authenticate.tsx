@@ -69,7 +69,7 @@ const Authenticate: NextPage = () => {
       </Head>
 
       <main>
-        <header className="bg-green-300 p-2 flex flex-row items-center gap-2 h-14 justify-center w-full">
+        <header className="bg-emerald-300 p-2 flex flex-row items-center gap-2 h-14 justify-center w-full">
           <h1 className="font-bold text-xl">Authenticate</h1>
         </header>
 
@@ -92,7 +92,7 @@ const Authenticate: NextPage = () => {
               data-cy="input-email"
               value={emailValue}
               onChange={(e) => setEmailValue(e.target.value)}
-              className="w-full rounded-lg border-2 border-green-700 px-2 py-1"
+              className="w-full rounded-lg border-2 border-emerald-700 px-2 py-1"
               type="email"
             />
           </label>
@@ -103,13 +103,17 @@ const Authenticate: NextPage = () => {
               data-cy="input-password"
               value={passwordValue}
               onChange={(e) => setPasswordValue(e.target.value)}
-              className="w-full rounded-lg border-2 border-green-700 px-2 py-1"
+              className="w-full rounded-lg border-2 border-emerald-700 px-2 py-1"
               type="password"
             />
           </label>
 
           {canSignIn && (
-            <Button data-cy="authenticate-submitbtn" type="submit" styles="text-white bg-green-700">
+            <Button
+              data-cy="authenticate-submitbtn"
+              type="submit"
+              styles="text-white bg-emerald-700"
+            >
               Authenticate
             </Button>
           )}

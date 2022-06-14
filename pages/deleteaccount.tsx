@@ -19,7 +19,7 @@ const DeleteAccount: NextPage = () => {
 
   function onFulfilled() {
     setIsModalOpen(false);
-    showNotif("Account deletion successful. Returning home...", "bg-green-600");
+    showNotif("Account deletion successful. Returning home...", "bg-emerald-600");
     setTimeout(() => router.push("/"), 2500);
   }
 
@@ -38,7 +38,7 @@ const DeleteAccount: NextPage = () => {
       </Head>
 
       <main className="flex flex-col">
-        <header className="bg-green-300 p-2 flex flex-row items-center gap-2 h-14 justify-center w-full">
+        <header className="bg-emerald-300 p-2 flex flex-row items-center gap-2 h-14 justify-center w-full">
           <h1 className="font-bold text-xl">Delete Account</h1>
         </header>
         {authContext.user === null ? (
@@ -46,7 +46,7 @@ const DeleteAccount: NextPage = () => {
             <p className="text-center mt-2 p-2">
               You must{" "}
               <Link passHref href="/signin?prevRoute=/deleteaccount">
-                <a className="underline text-green-700">Sign In</a>
+                <a className="underline text-emerald-700">Sign In</a>
               </Link>{" "}
               to an account to delete it.
             </p>

@@ -64,7 +64,7 @@ const Dev: NextPage = () => {
       <input type="text" ref={thumbnailImgUrl} placeholder="thumbnailimgurl" />
       <input type="text" ref={highResImgUrl} placeholder="highresimgurl" />
       <input type="text" ref={imgAttribution} placeholder="imgattribution" />
-      <button className="bg-green-700 text-white p-4 mt-4" type="submit">
+      <button className="bg-emerald-700 text-white p-4 mt-4" type="submit">
         Submit
       </button>
     </form>

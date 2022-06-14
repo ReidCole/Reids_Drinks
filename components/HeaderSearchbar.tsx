@@ -30,7 +30,7 @@ const HeaderSearchbar: React.FC = () => {
         className="w-full h-full rounded-full overflow-hidden flex flex-row relative"
       >
         <input
-          className="h-full w-full py-2 px-3 focus:outline-none focus:bg-green-700 focus:placeholder:text-gray-300 caret-white focus:text-white"
+          className="h-full w-full py-2 px-3 focus:outline-none focus:bg-emerald-700 focus:placeholder:text-gray-300 caret-white focus:text-white"
           data-cy="header-searchbar"
           placeholder="Search..."
           value={searchValue}
@@ -46,7 +46,7 @@ const HeaderSearchbar: React.FC = () => {
                   <a
                     data-cy="searchbar-link"
                     onClick={() => setSearchValue("")}
-                    className="p-2 hover:bg-green-200"
+                    className="p-2 hover:bg-emerald-200"
                   >
                     {p.title}
                   </a>

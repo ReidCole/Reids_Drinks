@@ -30,7 +30,7 @@ const SidebarLink: React.FC<Props> = ({ href, text, Icon, onClick }) => {
         data-cy="sidebar-link"
         className={
           "flex flex-row items-center px-2 py-4 text-xl gap-2 " +
-          (router.pathname == href ? "font-bold bg-green-200" : "")
+          (router.pathname == href ? "font-bold bg-emerald-200" : "")
         }
       >
         <Icon className="w-7 h-7" />

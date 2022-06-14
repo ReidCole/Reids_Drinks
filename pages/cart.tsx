@@ -57,7 +57,7 @@ const Cart: NextPage = () => {
       <main>
         <Header />
 
-        <h1 className="text-center font-bold text-2xl mt-6 mb-2 border-b-2 border-green-700 w-max mx-auto">
+        <h1 className="text-center font-bold text-2xl mt-6 mb-2 border-b-2 border-emerald-700 w-max mx-auto">
           Your Cart
         </h1>
 
@@ -95,7 +95,7 @@ const Cart: NextPage = () => {
             <Button
               data-cy="modal-cancelbtn"
               onClick={() => setBuyModalOpen(false)}
-              styles="bg-green-700 text-white basis-full"
+              styles="bg-emerald-700 text-white basis-full"
             >
               How rude...
             </Button>

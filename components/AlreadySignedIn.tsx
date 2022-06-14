@@ -19,7 +19,7 @@ const AlreadySignedIn: React.FC = () => {
         Sign Out
       </Button>
 
-      <Button styles="bg-green-700 w-60 text-white" href="/">
+      <Button styles="bg-emerald-700 w-60 text-white" href="/">
         Go To Home
       </Button>
     </div>

@@ -54,7 +54,7 @@ const CartItem: React.FC<Props> = ({ cartItemData, lastItem, refreshItems }) => 
     <div
       className={
         "grid grid-cols-2 gap-3 p-2 py-4 relative max-w-4xl mx-auto " +
-        (lastItem ? "" : "border-b-2 border-green-700")
+        (lastItem ? "" : "border-b-2 border-emerald-700")
       }
       data-cy="cart-item"
     >

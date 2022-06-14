@@ -84,7 +84,7 @@ const Product: NextPage = () => {
 
     showNotif(
       `Added ${quantity} ${product.title}${quantity !== 1 ? "s" : ""} to your cart.`,
-      "bg-green-600"
+      "bg-emerald-600"
     );
     return;
   }
@@ -147,7 +147,7 @@ const Product: NextPage = () => {
                     </Button>
                     <Button
                       onClick={product ? onAddToCart : () => {}}
-                      styles="bg-green-700 text-white basis-full"
+                      styles="bg-emerald-700 text-white basis-full"
                     >
                       {product ? "Add To Cart" : "..."}
                     </Button>
@@ -170,7 +170,7 @@ const Product: NextPage = () => {
           <div className="absolute bottom-0 p-2 flex flex-row w-full gap-2">
             <Button
               onClick={() => setBuyModalOpen(false)}
-              styles="bg-green-700 basis-full text-white"
+              styles="bg-emerald-700 basis-full text-white"
             >
               How rude...
             </Button>

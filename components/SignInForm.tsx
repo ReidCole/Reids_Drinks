@@ -25,7 +25,7 @@ const SignInForm: React.FC<Props> = ({ isCreatingAccount, onSubmit }) => {
           data-cy="input-email"
           value={emailValue}
           onChange={(e) => setEmailValue(e.target.value)}
-          className="w-full rounded-lg border-2 border-green-700 px-2 py-1"
+          className="w-full rounded-lg border-2 border-emerald-700 px-2 py-1"
           type="email"
         />
       </label>
@@ -36,13 +36,13 @@ const SignInForm: React.FC<Props> = ({ isCreatingAccount, onSubmit }) => {
           data-cy="input-password"
           value={passwordValue}
           onChange={(e) => setPasswordValue(e.target.value)}
-          className="w-full rounded-lg border-2 border-green-700 px-2 py-1"
+          className="w-full rounded-lg border-2 border-emerald-700 px-2 py-1"
           type="password"
         />
       </label>
 
       {canSignIn && (
-        <Button data-cy="signin-submitbtn" type="submit" styles="text-white bg-green-700">
+        <Button data-cy="signin-submitbtn" type="submit" styles="text-white bg-emerald-700">
           {isCreatingAccount ? "Create New Account" : "Sign In"}
         </Button>
       )}

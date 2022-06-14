@@ -84,7 +84,7 @@ const SignIn: NextPage = () => {
       </Head>
 
       <main className="flex flex-col items-center">
-        <header className="bg-green-300 p-2 flex flex-row items-center gap-2 h-14 justify-center mb-4 w-full">
+        <header className="bg-emerald-300 p-2 flex flex-row items-center gap-2 h-14 justify-center mb-4 w-full">
           <h1 className="font-bold text-xl">Sign In</h1>
         </header>
 
@@ -99,7 +99,7 @@ const SignIn: NextPage = () => {
               <SignInForm onSubmit={onSubmit} isCreatingAccount={isCreatingAccount} />
 
               <Link passHref href="/resetpassword">
-                <a className="text-green-700 underline p-2 mt-2 text-center">
+                <a className="text-emerald-700 underline p-2 mt-2 text-center">
                   Forgot your password?
                 </a>
               </Link>

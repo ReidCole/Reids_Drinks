@@ -36,7 +36,7 @@ const ResetPassword: NextPage = () => {
       </Head>
 
       <main>
-        <header className="bg-green-300 p-2 flex flex-row items-center gap-2 h-14 justify-center w-full">
+        <header className="bg-emerald-300 p-2 flex flex-row items-center gap-2 h-14 justify-center w-full">
           <h1 className="font-bold text-xl">Reset Password</h1>
         </header>
 
@@ -57,14 +57,16 @@ const ResetPassword: NextPage = () => {
               data-cy="input-email"
               value={emailValue}
               onChange={(e) => setEmailValue(e.target.value)}
-              className="w-full rounded-lg border-2 border-green-700 px-2 py-1"
+              className="w-full rounded-lg border-2 border-emerald-700 px-2 py-1"
               type="email"
             />
           </label>
 
           <button
             data-cy="submit-btn"
-            className={"py-2 text-white rounded-lg " + (canSubmit ? "bg-green-700" : "bg-gray-700")}
+            className={
+              "py-2 text-white rounded-lg " + (canSubmit ? "bg-emerald-700" : "bg-gray-700")
+            }
             disabled={!canSubmit}
             type="submit"
           >

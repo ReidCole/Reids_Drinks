@@ -13,7 +13,7 @@ const Account: NextPage = () => {
   const [notifState, showNotif] = useNotificationState();
 
   function onDeleteAccountFulfilled() {
-    showNotif("Account successfully deleted.", "bg-green-600");
+    showNotif("Account successfully deleted.", "bg-emerald-600");
   }
 
   function onDeleteAccountError(errorMsg: string) {
@@ -38,7 +38,7 @@ const Account: NextPage = () => {
         <div className="flex flex-col items-center my-4">
           <h1 className="text-center text-xl p-2 mb-4">
             Signed in as{" "}
-            <span className="text-green-700 font-bold whitespace-nowrap">
+            <span className="text-emerald-700 font-bold whitespace-nowrap">
               {authContext.user.email}
             </span>
           </h1>
@@ -66,7 +66,9 @@ const Account: NextPage = () => {
             You are not signed in. Please sign in to manage your account.
           </p>
           <Link href="/signin?prevRoute=/account">
-            <a className="bg-green-700 text-white py-2 w-60 rounded-lg mb-4 text-center">Sign In</a>
+            <a className="bg-emerald-700 text-white py-2 w-60 rounded-lg mb-4 text-center">
+              Sign In
+            </a>
           </Link>
         </div>
       )}

@@ -11,7 +11,7 @@ type Props = {
 const ScrollableProductsList: React.FC<Props> = ({ listHeading, products }) => {
   return (
     <div className="mb-4">
-      <h2 className="text-lg ml-3 pt-2 sm:text-xl md:text-2xl border-b-2 border-green-700 w-max">
+      <h2 className="text-lg ml-3 pt-2 sm:text-xl md:text-2xl border-b-2 border-emerald-700 w-max">
         {listHeading}
       </h2>
       <div className="overflow-x-scroll">
