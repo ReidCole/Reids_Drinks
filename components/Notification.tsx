@@ -26,7 +26,7 @@ const Notification: React.FC<Props> = ({ state }) => {
     >
       <p
         className={
-          "text-white px-2 py-4 m-3 text-center shadow-xl shadow-black md:w-96 md:mx-auto " +
+          "text-white px-2 py-4 m-3 text-center shadow-xl rounded-md md:w-96 md:mx-auto " +
           (state.styles ? state.styles : "bg-gray-600")
         }
       >

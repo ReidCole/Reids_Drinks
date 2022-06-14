@@ -57,7 +57,9 @@ const Cart: NextPage = () => {
       <main>
         <Header />
 
-        <h1 className="text-center font-bold text-2xl mt-6 mb-2">Your Cart</h1>
+        <h1 className="text-center font-bold text-2xl mt-6 mb-2 border-b-2 border-green-700 w-max mx-auto">
+          Your Cart
+        </h1>
 
         {cartItems.length > 0 ? (
           <>

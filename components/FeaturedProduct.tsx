@@ -26,7 +26,7 @@ const FeaturedProduct: React.FC<Props> = ({ product }) => {
 
   return (
     // give div a max height
-    <div className="flex flex-col p-4 border-b-2 border-green-700 sm:flex-row sm:gap-4 ">
+    <div className="flex flex-col p-4 sm:flex-row sm:gap-4 from-white to-green-300 bg-gradient-to-r mb-4 ">
       <div className="relative sm:order-1 sm:w-1/2">
         <h2 className="text-xl font-bold sm:text-2xl">{product ? product.title : "..."}</h2>
         <p className="mb-2 sm:text-lg">{product ? "$" + product.price.toFixed(2) : "..."}</p>
@@ -45,7 +45,7 @@ const FeaturedProduct: React.FC<Props> = ({ product }) => {
       </div>
       <div className="featured-product-img">
         <Link passHref href={product ? `product/${product.productId}` : "/"}>
-          <a className="flex">
+          <a className="flex rounded-xl overflow-hidden shadow-lg">
             <Image
               src={product ? product.highResImgUrl : unloadedImg}
               width={640}

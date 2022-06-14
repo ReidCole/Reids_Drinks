@@ -60,7 +60,7 @@ const CartItem: React.FC<Props> = ({ cartItemData, lastItem, refreshItems }) => 
     >
       <div className="flex flex-col">
         <Link passHref href={product ? `product/${product.productId}` : ""}>
-          <a className="flex">
+          <a className="flex overflow-hidden rounded-xl shadow-lg">
             <Image
               src={product ? product.thumbnailImgUrl : unloadedImg}
               width={640}

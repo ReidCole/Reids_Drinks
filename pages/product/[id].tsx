@@ -106,7 +106,7 @@ const Product: NextPage = () => {
           <div className="flex flex-col p-4 items-center">
             <div className="w-full flex flex-col items-center md:flex-row md:gap-4 relative max-w-6xl">
               <div className="w-full">
-                <div className="flex flex-col mb-3 product-img relative">
+                <div className="flex flex-col mb-3 product-img relative overflow-hidden rounded-xl shadow-lg">
                   {product ? (
                     <Image
                       src={product.highResImgUrl}

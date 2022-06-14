@@ -8,10 +8,18 @@ const HeaderSearchbar: React.FC = () => {
   const databaseContext = useContext(DatabaseContext);
   const [searchValue, setSearchValue] = useState<string>("");
   const [areResultsOpen, setAreResultsOpen] = useState(false);
+  const [filteredProducts, setFilteredProducts] = useState<ProductListing[]>([]);
 
   useEffect(() => {
+    if (databaseContext === null) return;
+
     setAreResultsOpen(searchValue.length > 0);
-  }, [searchValue]);
+
+    const filtered = databaseContext.allProducts.filter((p) =>
+      p.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+  }, [searchValue, databaseContext]);
 
   return (
     <>
@@ -29,23 +37,27 @@ const HeaderSearchbar: React.FC = () => {
           onChange={(e) => setSearchValue(e.target.value)}
         />
       </form>
-      {areResultsOpen && databaseContext !== null && databaseContext.allProducts.length > 0 && (
-        <div className="absolute top-14 bg-white z-10 left-0 right-0 px-2 mx-6 h-60 overflow-y-scroll flex flex-col border-b-2 border-x-2 rounded-b-lg border-green-700 shadow-lg shadow-gray-700">
-          {databaseContext.allProducts
-            .filter((p) => p.title.toLowerCase().includes(searchValue.toLowerCase()))
-            .map((p) => (
-              <Link passHref href={`/product/${p.productId}`} key={p.productId}>
-                <a
-                  data-cy="searchbar-link"
-                  onClick={() => setAreResultsOpen(false)}
-                  className="py-2"
-                >
-                  {p.title}
-                </a>
-              </Link>
-            ))}
-        </div>
-      )}
+      <div className="flex flex-col items-center absolute top-14 left-0 w-full px-6">
+        {areResultsOpen && (
+          <div className="top-14 bg-white z-10 left-0 right-0 max-h-60 w-full max-w-lg overflow-y-auto overflow-hidden flex flex-col rounded-b-xl shadow-lg">
+            {filteredProducts.length > 0 ? (
+              filteredProducts.map((p) => (
+                <Link passHref href={`/product/${p.productId}`} key={p.productId}>
+                  <a
+                    data-cy="searchbar-link"
+                    onClick={() => setSearchValue("")}
+                    className="p-2 hover:bg-green-200"
+                  >
+                    {p.title}
+                  </a>
+                </Link>
+              ))
+            ) : (
+              <p className="p-2">No results</p>
+            )}
+          </div>
+        )}
+      </div>
     </>
   );
 };
