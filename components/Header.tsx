@@ -15,6 +15,7 @@ const Header: React.FC = () => {
     <>
       <header className="bg-emerald-300 p-2 flex flex-row items-center gap-2 h-14">
         <button
+          name="Open Sidebar"
           className="md:hidden"
           data-cy="header-sidebarbtn"
           onClick={() => setSidebarVisible((prev) => !prev)}

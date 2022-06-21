@@ -33,7 +33,11 @@ const Sidebar: React.FC<Props> = ({ isVisible, setIsVisible }) => {
         data-cy="sidebar"
       >
         <div className="p-2 flex flex-row items-center h-14">
-          <button data-cy="sidebar-backbtn" onClick={() => setIsVisible(false)}>
+          <button
+            name="Close Sidebar"
+            data-cy="sidebar-backbtn"
+            onClick={() => setIsVisible(false)}
+          >
             <BsArrowLeft className="w-8 h-8" />
           </button>
         </div>
